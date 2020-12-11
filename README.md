@@ -1,24 +1,38 @@
-# README
+# HealthSupport
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
 
-Things you may want to cover:
+健康を気遣う人のためのサポートツール
 
-* Ruby version
+### サイトテーマ
 
-* System dependencies
+あなたの毎日をちょっと健康に
 
-* Configuration
+### テーマを選んだ理由
 
-* Database creation
+健康維持のために運動やダイエットを頑張りたいけど、一人ではなかなかモチベーションが続かず途中でやめてしまう。私自身、そんな経験を何度もしてきました。そこで、同じように頑張る仲間と繋がり、励ましあえる場所があったらいいなと思い、このテーマを選びました。
 
-* Database initialization
+### ターゲットユーザ
 
-* How to run the test suite
+健康維持や、ダイエット・筋トレを頑張りたい人
 
-* Services (job queues, cache servers, search engines, etc.)
+### 主な利用シーン
 
-* Deployment instructions
+日々の健康管理、運動やダイエットのモチベーション維持に
 
-* ...
+## 設計書
+
+### 機能一覧
+
+https://docs.google.com/spreadsheets/d/1CnsxchOiho7A18ua8X0HRTk66JnGkzLBcxc4zhmYGJw/edit#gid=0
+
+## 開発環境
+
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails,Bootstrap
+- JS ライブラリ：jQuery
+- 外部 API Google Vision AI API
+- インフラ AWS(EC2,RDS,AMI,EIP)
+- テストフレームワーク RSpec
+- IDE：Cloud9
