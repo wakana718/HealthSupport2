@@ -29,6 +29,6 @@ class PostsController < ApplicationController
   # 投稿データのストロングパラメータ
   private
   def post_params
-    params.require(:post).permit(:body, :image, :user_id, :genre_id)
+    params.require(:post).permit(:body, :image, :user_id, :genre_status)
   end
 end

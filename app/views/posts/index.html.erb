@@ -5,6 +5,7 @@
         <% @posts.each do |post| %>
          <div class="row post-image"><%= attachment_image_tag post, :image, :fill, 100, 100, fallback: "no_image.jpg" %></div>
          <div class="row post-body"><%= post.body %></div>
+         <div class="row post-genre"><%= post.genre_status %></div>
         <% end %>
       </div>
     </div>
