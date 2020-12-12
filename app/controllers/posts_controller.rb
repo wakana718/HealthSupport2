@@ -9,7 +9,8 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     @post.save
-    redirect_to posts_path  end
+    redirect_to user_path(current_user), notice: "投稿しました！"
+  end
 
   def index
     @posts = Post.all
@@ -20,6 +21,9 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to user_path(current_user), notice: "正常に削除されました！"
   end
 
   # 投稿データのストロングパラメータ

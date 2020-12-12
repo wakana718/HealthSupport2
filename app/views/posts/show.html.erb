@@ -1,13 +1,13 @@
 <div class="container">
  <div class="row">
     <h1>投稿した内容</h1>
-      <h4>写真</h4>
-      <%= attachment_image_tag @post, :image, :fill, 70, 70, format: 'jpeg', fallback: "no_image.jpg" %>
+      <h4>画像</h4>
+      <%= attachment_image_tag @post, :image, :fill, 100, 100, fallback: "no_image.jpg" %>
       <h4>コメント</h4>
       <%= @post.body %>
 
       <% if current_user == @post.user %>
-      <button class="btn btn-danger"><%= link_to "投稿を削除", post_path(@post.id), method: :delete, data: {confirm: "本当に消しますか？"} %></button>
+      <%= link_to "投稿を削除", post_path(@post.id), method: :delete, data: {confirm: "本当に消しますか？"}, class:"btn btn-danger" %>
       <% end %>
 
  </div>

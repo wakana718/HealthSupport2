@@ -1,5 +1,11 @@
-<h1>あなたの投稿一覧</h1>
-<% @posts.each do |post| %>
-<%= attachment_image_tag post, :image %>
-<%= post.body %>
-<% end %>
+<div class="container">
+   <div class="row">
+     <div class="col-xs-4">
+       <h1>投稿一覧</h1>
+        <% @posts.each do |post| %>
+         <div class="row post-image"><%= attachment_image_tag post, :image, :fill, 100, 100, fallback: "no_image.jpg" %></div>
+         <div class="row post-body"><%= post.body %></div>
+        <% end %>
+      </div>
+    </div>
+</div>

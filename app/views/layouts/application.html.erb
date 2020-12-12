@@ -15,6 +15,7 @@
     <nav class="nav navbar-nav navbar-left" style= "color :white;">
       <h3>HealthSupport</h3>
     </nav>
+
     <nav>
      <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn" style= "color :#ffffff;">
     <% if user_signed_in? %>
@@ -28,10 +29,15 @@
         <%= link_to 'マイページ', user_path(current_user.id) %>
         </span>
       </li>
+      <li class="list-unstyled">
+        <span class="glyphicon glyphicon-user" aria-hidden="true">
+        <%= link_to '投稿する', new_post_path %>
+        </span>
+      </li>
 
       <li class="list-unstyled">
         <span class="glyphicon glyphicon-log-out" aria-hidden="true">
-        <%= link_to "logout", destroy_user_session_path, method: :delete %>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
         </span>
       </li>
     <% else %>
