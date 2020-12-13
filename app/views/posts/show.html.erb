@@ -3,7 +3,7 @@
     <h1>投稿した内容</h1>
       <div class="row post-image"><h4>画像</h4><%= attachment_image_tag @post, :image, :fill, 100, 100, fallback: "no_image.jpg" %></div>
       <div class="row post-body"><h4>コメント</h4><%= @post.body %></div>
-      <div class="row post-genre"><h4>ジャンル</h4><%= @post.genre_status %></div>
+      <div class="row post-genre"><h4>カテゴリ</h4><%= @post.genre_status %></div>
       <div class="row post-destroy">
       <% if current_user == @post.user %>
       <%= link_to "投稿を削除", post_path(@post.id), method: :delete, data: {confirm: "本当に消しますか？"}, class:"btn btn-danger" %>

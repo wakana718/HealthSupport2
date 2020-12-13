@@ -14,7 +14,11 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    if params[:genre_status].present?
+     @posts = @posts.get_by_genre_status params[:genre_status]
+    end
   end
+
 
   def show
     @post = Post.find(params[:id])

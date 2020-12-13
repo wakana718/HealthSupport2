@@ -1,10 +1,13 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :correct_user, only: [:edit, :update]
+
   def top
   end
 
   def show
     @user = User.find(params[:id])
-    @posts = Post.all
+    @posts = @user.posts
 
   end
 
