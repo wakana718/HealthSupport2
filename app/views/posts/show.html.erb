@@ -9,5 +9,44 @@
       <%= link_to "投稿を削除", post_path(@post.id), method: :delete, data: {confirm: "本当に消しますか？"}, class:"btn btn-danger" %>
       <% end %>
       </div>
+      <br>
+      <!--コメント数の表示-->
+      <div class="row post-comment">コメント数：<%= @post.comments.count %>件</div>
+      <!--いいね数の表示-->
+      <div class="row post-like">
+       <% if @post.liked_by?(current_user) %>
+         いいね：<%= link_to @post.likes.count, post_likes_path(@post), method: :delete, local: true, class: "glyphicon glyphicon-heart"  %>
+       <% else %>
+         いいね：<%= link_to @post.likes.count, post_likes_path(@post), method: :post, local: true, class: "glyphicon glyphicon-heart-empty" %>
+       <% end %>
+      </div>
  </div>
 </div>
+
+　　<!--コメント文の表示-->
+<ol>
+  <% @post.comments.each do |comment| %>
+    <li class="comment">
+      <div class="comment-image"><%= image_tag('no_image.jpg', style: "width: 60px; height: 60px;") %></div>
+      <div class="comment-text">
+        <a href="#" class="link-author"><%= comment.user.name %></a>
+        <span class="comment-date"><%= comment.created_at.strftime('%Y/%m/%d') %></span>
+        <div class="comment-body"><%= comment.comment %></div>
+        <% if comment.user == current_user %>
+        <div><%= link_to "コメントを削除", post_comment_path(comment.post, comment), method: :delete, class: "btn btn-danger pull-right" %></div>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+</ol>
+
+
+<!--コメント入力フォーム-->
+<%= form_with(model:[@post, @comment], local: true) do |f| %>
+  <div class="row">
+    <div class="col-sm-12">
+      <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+    </div>
+  </div>
+  <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+<% end %>
