@@ -29,6 +29,8 @@
          <div class="row post-genre"><%= post.genre_status %></div>
          <!--コメント数の表示-->
          <div class="row post-comment">コメント数：<%= post.comments.count %>件</div>
+         <!--いいね数の表示-->
+         <div class="row post-like" style="glyphicon glyphicon-heart">いいね数：<%= post.likes.count %>件</div>
          <%= link_to "詳細表示", post_path(post.id), class:"btn btn-default" %>
         <% end %>
       </div>
