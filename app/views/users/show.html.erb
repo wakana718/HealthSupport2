@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <h2>あなたのプロフィール</h2>
+    <h2>プロフィール</h2>
     <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
    <table class="table, class:"col-xs-6"">
     <tr>
@@ -11,6 +11,10 @@
      <th><h4>自己紹介文： </h4></th>
      <th><%= @user.intoduction %></th>
     </tr>
+    <tr>
+     <th><%= link_to "フォロー数: #{@user.follower.count}", following_user_path %></th>
+     <th><%= link_to "フォロワー数: #{@user.followed.count}", followers_user_path %></th>
+    </tr>
     </table>
    <br>
    <br>
@@ -18,11 +22,18 @@
     <%= link_to  "プロフィールを編集", edit_user_path(@user), class:"col-xs-4 btn btn-default" %>
     <% end %>
   </div>
+    <% unless @user == current_user %>
+     <% if current_user.following?(@user) %>
+     <%= link_to 'フォローを外す', unfollow_path(@user.id), method: :POST, class:"col-xs-4 btn btn-success" %>
+    <% else %>
+     <%= link_to 'フォローする', follow_path(@user.id), method: :POST, class:"col-xs-4 btn btn-success" %>
+     <% end %>
+    <% end %>
 </div>
 <br>
 <div class="row">
-     <div class="col-xs-12">
-       <h2>あなたの投稿</h2>
+   <div class="col-xs-12">
+       <h2>投稿一覧</h2>
         <% @posts.each do |post| %>
          <div class="row post-image"><%= attachment_image_tag post, :image, :fill, 100, 100, fallback: "no_image.jpg" %></div>
          <div class="row post-body"><%= post.body %></div>
@@ -33,6 +44,46 @@
          <div class="row post-like" style="glyphicon glyphicon-heart">いいね数：<%= post.likes.count %>件</div>
          <%= link_to "詳細表示", post_path(post.id), class:"btn btn-default" %>
         <% end %>
-      </div>
-    </div>
+   </div>
+ </div>
+
+
+
+<h2>ユーザー詳細ページ</h2>
+
+<p><%= "フォロー数: #{@user.follower.count}" %></p>
+<p><%= "フォロワー数: #{@user.followed.count}" %></p>
+<% unless @user == current_user %>
+  <% if current_user.following?(@user) %>
+    <%= link_to 'フォロー外す', unfollow_path(@user.id), method: :POST %>
+  <% else %>
+    <%= link_to 'フォローする', follow_path(@user.id), method: :POST %>
+  <% end %>
+<% end %>
+<p></p>
+
+<h3>フォロー一覧</h3>
+  <% @user.following_user.where.not(id: current_user.id).each do |user| %>
+    <p>
+      <%= "id: #{user.id} email: #{user.email}" %>
+      <% if current_user.following?(user) %>
+        <%= link_to 'フォロー外す', unfollow_path(user.id), method: :POST %>
+      <% else %>
+        <%= link_to 'フォローする', follow_path(user.id), method: :POST %>
+      <% end %>
+      <%= link_to "show", user_path(user) %>
+    </p>
+  <% end %>
+<h3>フォロワー一覧</h3>
+  <% @user.follower_user.where.not(id: current_user.id).each do |user| %>
+    <p>
+      <%= "id: #{user.id} email: #{user.email}" %>
+      <% if current_user.following?(user) %>
+        <%= link_to 'フォロー外す', unfollow_path(user.id), method: :POST %>
+      <% else %>
+        <%= link_to 'フォローする', follow_path(user.id), method: :POST %>
+      <% end %>
+      <%= link_to "show", user_path(user) %>
+    </p>
+  <% end %>
 

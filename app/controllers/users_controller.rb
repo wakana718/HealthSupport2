@@ -5,6 +5,10 @@ class UsersController < ApplicationController
   def top
   end
 
+  def index
+    @users = User.all
+  end
+
   def show
     @user = User.find(params[:id])
     @posts = @user.posts
@@ -23,6 +27,16 @@ class UsersController < ApplicationController
    else
      render :edit
    end
+  end
+
+  def following
+    @user  = User.find(params[:id])
+    render 'follow'
+  end
+
+  def followers
+    @user  = User.find(params[:id])
+    render 'follower'
   end
 
 
