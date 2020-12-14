@@ -39,7 +39,11 @@ class UsersController < ApplicationController
     render 'follower'
   end
 
+  def favorites
+    @fav_posts = current_user.fav_posts
+  end
 
+ private
   def user_params
     params.require(:user).permit(:name, :profile_image, :intoduction)
   end

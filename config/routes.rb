@@ -6,11 +6,13 @@ Rails.application.routes.draw do
     member do
      get :following, :followers #フォロー一覧・フォロワー一覧
     end
+    get :favorites, on: :collection #users/favorites
   end
 
   resources :posts, only: [:new, :create, :index, :show, :destroy] do
     resources :comments, only: [:create, :destroy]
     resource :likes, only: [:create, :destroy]
+    resource :favorites, only: [:create, :destroy]
   end
 
 

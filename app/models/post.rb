@@ -9,11 +9,22 @@ class Post < ApplicationRecord
     where(genre_status: genre_status)
   }
 
+ # コメント機能
  has_many :comments, dependent: :destroy
  has_many :likes, dependent: :destroy
 
+ # いいねの重複防止
  def liked_by?(user)
     likes.where(user_id: user.id).exists?
+ end
+
+ # お気に入り機能
+ has_many :favorites
+ has_many :users, through: :favorites
+
+ # お気に入りの重複防止
+ def favorite_by?(user)
+    favorites.where(user_id: user.id).exists?
  end
 
 end
