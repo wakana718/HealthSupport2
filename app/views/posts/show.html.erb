@@ -1,9 +1,10 @@
 <div class="container">
  <div class="row">
     <h1>投稿詳細</h1>
-      <div class="row post-image"><h4>画像</h4><%= attachment_image_tag @post, :image, :fill, 100, 100, fallback: "no_image.jpg" %></div>
-      <div class="row post-body"><h4>コメント</h4><%= @post.body %></div>
-      <div class="row post-genre"><h4>カテゴリ</h4><%= @post.genre_status %></div>
+      <div class="row post-image"><%= attachment_image_tag @post, :image, :fill, 100, 100, fallback: "no_image.jpg" %></div>
+      <div class="row post-body"><h6>コメント：</h6><%= @post.body %></div>
+      <div class="row post-genre"><h6>カテゴリ：</h6><%= @post.genre_status %></div>
+      <div class="row post-date"><h6>投稿日時：</h6><%= @post.created_at.strftime('%Y/%m/%d') %></div>
       <div class="row post-destroy">
       <% if current_user == @post.user %>
       <%= link_to "投稿を削除", post_path(@post.id), method: :delete, data: {confirm: "本当に消しますか？"}, class:"btn btn-danger" %>
@@ -27,15 +28,17 @@
 <ol>
   <% @post.comments.each do |comment| %>
     <li class="comment">
-      <div class="comment-image"><%= image_tag('no_image.jpg', style: "width: 60px; height: 60px;") %></div>
-      <div class="comment-text">
-        <a href="#" class="link-author"><%= comment.user.name %></a>
-        <span class="comment-date"><%= comment.created_at.strftime('%Y/%m/%d') %></span>
-        <div class="comment-body"><%= comment.comment %></div>
-        <% if comment.user == current_user %>
+      <%= link_to user_path(comment.user) do %>
+       <div class="comment-image"><%= attachment_image_tag(comment.user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg") %></div>
+       <div class="comment-text">
+       <div class="comment-author"><%= comment.user.name %></div>
+      <% end %>
+       <span class="comment-date"><%= comment.created_at.strftime('%Y/%m/%d') %></span>
+       <div class="comment-body"><%= comment.comment %></div>
+       <% if comment.user == current_user %>
         <div><%= link_to "コメントを削除", post_comment_path(comment.post, comment), method: :delete, class: "btn btn-danger pull-right" %></div>
-        <% end %>
-      </div>
+       <% end %>
+        </div>
     </li>
   <% end %>
 </ol>
