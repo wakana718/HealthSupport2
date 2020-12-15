@@ -8,8 +8,14 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    @post.save
-    redirect_to user_path(current_user), notice: "投稿しました！"
+    if @post.save
+       # 投稿に成功した場合
+      redirect_to user_path(current_user), notice: "投稿しました！"
+    else
+       # 投稿に失敗した場合
+      flash.now[:alert] = '投稿に失敗しました'
+      render :new
+    end
   end
 
   def index
@@ -17,6 +23,7 @@ class PostsController < ApplicationController
     if params[:genre_status].present?
      @posts = @posts.get_by_genre_status params[:genre_status]
     end
+    # ランキング機能
     @all_ranks = Post.find(Like.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
   end
 
@@ -28,8 +35,14 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
-    @post.destroy
-    redirect_to user_path(current_user), notice: "正常に削除されました！"
+    if @post.destroy
+       # 削除に成功した場合
+      redirect_to user_path(current_user), notice: "投稿が削除されました！"
+    else
+       # 削除に失敗した場合
+      flash.now[:alert] = '削除に失敗しました'
+      render :show
+    end
   end
 
   # 投稿データのストロングパラメータ

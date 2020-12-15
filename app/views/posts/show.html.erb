@@ -54,6 +54,19 @@
 
 <!--コメント入力フォーム-->
 <%= form_with(model:[@post, @comment], local: true) do |f| %>
+<!--バリデーション-->
+<% if @comment.errors.any? %>
+  <div id="error_explanation" class="alert alert-warning">
+    <ul class="mb-0">
+      <% @comment.errors.full_messages.each do |message| %>
+        <li>
+        <%= message %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
   <div class="row">
     <div class="col-sm-12">
       <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>

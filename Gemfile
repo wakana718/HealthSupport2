@@ -69,6 +69,7 @@ gem 'jquery-rails'
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
 gem 'ransack'
+gem 'rails-i18n'
 
 gem 'dotenv-rails'
 group :production do

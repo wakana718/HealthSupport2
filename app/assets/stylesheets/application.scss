@@ -19,33 +19,49 @@
 
 
 
-/* フッターを固定
--------------------------------------------------- */
+// フッターを固定
 html {
   position: relative;
   min-height: 100%;
 }
+
+// フッターの下側マージンの高さ
 body {
-  /* フッターの下側マージンの高さ */
   margin-bottom: 60px;
 }
+
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  /* ここでフッターの固定高さを設定 */
+  // フッターの高さを固定
   height: 60px;
   background-color: #7fffd4;
 }
 
-/* ページのカスタムCSS */
 .navbar-default {
   background-color: #7fffd4;
 }
 
-
-/* フッタを画面下部に固定の設定とは無関係 */
 .container .text-muted {
   margin: 20px 0;
   color :#ffffff
+}
+
+// フラッシュメッセージ
+.notifications {
+  color: white;
+  text-align: center;
+
+  .notice {
+    background-color: lightBlue;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+
+  .alert {
+    background-color: orange;
+  }
 }

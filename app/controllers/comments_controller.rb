@@ -5,8 +5,11 @@ class CommentsController < ApplicationController
     # comment.user_id = current_user.idの2行を1行で↓
     comment = current_user.comments.new(comment_params)
     comment.post_id = post.id
-    comment.save
-    redirect_to post_path(post)
+    if comment.save
+     redirect_to post_path(post)
+    else
+     redirect_to post_path(post)
+    end
   end
 
   def destroy

@@ -1,4 +1,5 @@
-<h2>お気に入り投稿一覧</h2>
+<h2>お気に入り一覧</h2>
+ <% if @fav_posts.exists? %>
 <table class="table">
         <thead>
          <tr>
@@ -47,3 +48,6 @@
          </tr>
         <tbody>
        </table>
+      <% else %>
+       <p>お気に入りした投稿はまだありません</p>
+      <% end %>

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:top]
   before_action :current_user, only: [:edit, :update]
 
   def top
@@ -21,11 +21,13 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-   if
-     @user.update(user_params)
-     redirect_to user_path(current_user), notice: "プロフィールを更新しました！"
+   if @user.update(user_params)
+      # 編集に成功した場合
+      redirect_to user_path(current_user), notice: "プロフィールを更新しました！"
    else
-     render :edit
+      # 編集に失敗した場合
+      flash.now[:alert] = 'プロフィールを更新できませんでした'
+      render :edit
    end
   end
 
