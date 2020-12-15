@@ -23,6 +23,7 @@
     <label class="control-label sr-only" for="inputEmail">Introduction</label>
      <%= f.text_area :intoduction %>
   <%= f.submit "プロフィールを更新", class:"btn btn-default" %>
+  <%= link_to "キャンセル", user_path(@user), class:"btn btn-default" %>
  <% end %>
 
   </div>
