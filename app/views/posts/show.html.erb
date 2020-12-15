@@ -21,6 +21,14 @@
          いいね：<%= link_to @post.likes.count, post_likes_path(@post), method: :post, local: true, class: "glyphicon glyphicon-heart-empty" %>
        <% end %>
       </div>
+      <!--お気に入り登録・解除-->
+      <div>
+        <% if @post.favorite_by?(current_user) %>
+           <%= link_to "お気に入り解除",post_favorites_path(@post),method: :delete %>
+        <% else %>
+            <%= link_to "お気に入り登録",post_favorites_path(@post),method: :post %>
+        <% end %>
+      </div>
  </div>
 </div>
 

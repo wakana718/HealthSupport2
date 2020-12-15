@@ -12,7 +12,7 @@ class FavoritesController < ApplicationController
   def destroy
     if favorite=Favorite.find_by(user_id: current_user.id,post_id: params[:post_id])
       favorite.delete
-      redirect_to users_path
+      redirect_to request.referer
     else
       redirect_to root_path
     end

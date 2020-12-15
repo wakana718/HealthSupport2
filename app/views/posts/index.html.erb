@@ -7,7 +7,7 @@
 　　　　<%= submit_tag "検索" %>
 　　　　<% end %>
 　　　</div>
-　　　　<!--投稿一覧表示-->
+
 　　　　<table class="table">
         <thead>
          <tr>
@@ -42,20 +42,71 @@
           いいね：<%= link_to post.likes.count, post_likes_path(post), method: :post, local: true, class: "glyphicon glyphicon-heart-empty" %>
        　 <% end %>
           </td>
-
-         <td>
+          <!--お気に入り登録・解除-->
+          <td>
             <% if post.favorite_by?(current_user) %>
                 <%= link_to "お気に入り解除",post_favorites_path(post),method: :delete %>
             <% else %>
                 <%= link_to "お気に入り登録",post_favorites_path(post),method: :post %>
             <% end %>
-         </td>
-
-
-
+          </td>
        　  <br>
        　  <td><%= link_to "詳細表示", post_path(post.id), class:"btn btn-default" %></td>
           <% end %>
          </tr>
         <tbody>
        </table>
+
+
+       <h1>いいね順ランキング</h1>
+　　　　<table class="table">
+        <thead>
+         <tr>
+          <th colspan="1"></th>
+　        <th>ユーザー</th>
+　        <th colspan="1"></th>
+　        <th>投稿</th>
+　        <th colspan="1"></th>
+　        <th>カテゴリ</th>
+　        <th>投稿日時</th>
+　        <th>コメント</th>
+　        <th>いいね</th>
+　       </tr>
+　      </thead>
+　      <tbody>
+　        <% @all_ranks.each.with_index(1) do |post, i| %>
+　       <tr>
+          <%= link_to user_path(post.user) do %>
+          <td> 第<%= i %>位</td>
+		  <td><%= attachment_image_tag(post.user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpeg") %></td>
+		  <td><%= post.user.name %></td>
+	   　 <% end %>
+          <td><%= attachment_image_tag post, :image, :fill, 100, 100, fallback: "no_image.jpg" %></td>
+          <td><%= post.body %></td>
+          <td><%= post.genre_status %></td>
+          <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
+         <!--コメント数の表示-->
+          <td><div class= "glyphicon glyphicon-comment">：<%= post.comments.count %>件</div></td>
+         <!--いいね数の表示-->
+      　   <td>
+       　  <% if post.liked_by?(current_user) %>
+          いいね：<%= link_to post.likes.count, post_likes_path(post), method: :delete, local: true, class: "glyphicon glyphicon-heart"  %>
+       　  <% else %>
+          いいね：<%= link_to post.likes.count, post_likes_path(post), method: :post, local: true, class: "glyphicon glyphicon-heart-empty" %>
+       　 <% end %>
+          </td>
+          <!--お気に入り登録・解除-->
+          <td>
+            <% if post.favorite_by?(current_user) %>
+                <%= link_to "お気に入り解除",post_favorites_path(post),method: :delete %>
+            <% else %>
+                <%= link_to "お気に入り登録",post_favorites_path(post),method: :post %>
+            <% end %>
+          </td>
+       　  <br>
+       　  <td><%= link_to "詳細表示", post_path(post.id), class:"btn btn-default" %></td>
+          <% end %>
+         </tr>
+        <tbody>
+       </table>
+

@@ -34,16 +34,13 @@
        　 <% end %>
           </td>
 
-         <td>
+          <td>
             <% if post.favorite_by?(current_user) %>
                 <%= link_to "お気に入り解除",post_favorites_path(post),method: :delete %>
             <% else %>
                 <%= link_to "お気に入り登録",post_favorites_path(post),method: :post %>
             <% end %>
-         </td>
-
-
-
+          </td>
        　  <br>
        　  <td><%= link_to "詳細表示", post_path(post.id), class:"btn btn-default" %></td>
           <% end %>

@@ -17,6 +17,7 @@ class PostsController < ApplicationController
     if params[:genre_status].present?
      @posts = @posts.get_by_genre_status params[:genre_status]
     end
+    @all_ranks = Post.find(Like.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
   end
 
 
