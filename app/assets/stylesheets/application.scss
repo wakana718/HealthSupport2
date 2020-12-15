@@ -65,3 +65,32 @@ body {
     background-color: orange;
   }
 }
+
+/* 高さを指定することにより画像が表示される */
+#box{
+  height: 600px;
+}
+.image1 {
+  background-image: url(野菜.jpg);
+}
+.image2 {
+  background-image: url(くびれ.jpg);
+}
+.image3 {
+  background-image: url(お喋り.jpg);
+}
+.image4 {
+  background-image: url(ストレッチする女性.jpg);
+}
+.image5 {
+  background-image: url(ダンベル女性.jpg);
+}
+.image6 {
+  background-image: url(仲間.jpg);
+}
+.image7 {
+  background-image: url(野菜中心の食事.jpg);
+}
+.image8 {
+  background-image: url(ジョギング.jpg);
+}
