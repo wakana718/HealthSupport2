@@ -1,60 +1,88 @@
-<div class="row">
-  <div class="col-xs-12">
+<div class = "container">
+ <div class="row">
+  <div class="col-xs-3">
     <h2>プロフィール</h2>
     <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
    <table class="table, class:"col-xs-6"">
     <tr>
-     <th><h4>ユーザーネーム： </h4></th>
+     <th><h5>ユーザーネーム： </h5></th>
+    </tr>
+    <tr>
      <th><%= @user.name %></th>
     </tr>
     <tr>
-     <th><h4>自己紹介文： </h4></th>
+     <th><h5>自己紹介文： </h4></th>
+    </tr>
+    <tr>
      <th><%= @user.intoduction %></th>
     </tr>
     <tr>
      <th><%= link_to "フォロー数: #{@user.follower.count}", following_user_path %></th>
+    </tr>
+    <tr>
      <th><%= link_to "フォロワー数: #{@user.followed.count}", followers_user_path %></th>
     </tr>
-    </table>
-   <br>
-   <br>
     <% if @user.id == current_user.id %>
-    <%= link_to  "プロフィールを編集", edit_user_path(@user), class:"col-xs-4 btn btn-default" %>
+    <tr>
+     <th><%= link_to  "プロフィールを編集", edit_user_path(@user), class:"col-xs-12 btn btn-primary" %></th>
+    </tr>
+    <tr>
+     <th><%= link_to  "アカウントを削除", user_registration_path(@user), method: :DELETE, class:"col-xs-12 btn btn-danger" %></th>
+    </tr>
     <% end %>
-  </div>
+
     <% unless @user == current_user %>
      <% if current_user.following?(@user) %>
-     <%= link_to 'フォローを外す', unfollow_path(@user.id), method: :POST, class:"col-xs-4 btn btn-success" %>
+    <tr>
+     <th><%= link_to 'フォローを外す', unfollow_path(@user.id), method: :POST, class:"col-xs-12 btn btn-success" %></th>
+    </tr>
     <% else %>
-     <%= link_to 'フォローする', follow_path(@user.id), method: :POST, class:"col-xs-4 btn btn-success" %>
+    <tr>
+     <th><%= link_to 'フォローする', follow_path(@user.id), method: :POST, class:"col-xs-12 btn btn-success" %></th>
+    </tr>
      <% end %>
     <% end %>
-</div>
-<br>
-<div class="row">
-   <div class="col-xs-12">
+   </table>
+  </div>
+
+  <div class="col-xs-9">
        <h2>投稿一覧</h2>
       <% if @posts.exists? %>
+      <table class="table">
+      <thead>
+         <tr>
+          <th colspan="2"></th>
+　        <th>カテゴリ</th>
+　        <th>投稿日時</th>
+　        <th>コメント</th>
+　        <th>いいね</th>
+　       </tr>
+　      </thead>
+　      <tbody>
         <% @posts.each do |post| %>
-         <div class="row post-image"><%= attachment_image_tag post, :image, :fill, 100, 100, fallback: "no_image.jpg" %></div>
-         <div class="row post-body"><%= post.body %></div>
-         <div class="row post-genre">カテゴリ：<%= post.genre_status %></div>
+        <tr>
+         <td><%= attachment_image_tag post, :image, :fill, 100, 100, fallback: "no_image.jpg" %></td>
+         <td><%= post.body %></td>
+         <td><%= post.genre_status %></td>
+         <td><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></td>
          <!--コメント数の表示-->
-         <div class="row post-comment">コメント数：<%= post.comments.count %>件</div>
+         <td><div class= "glyphicon glyphicon-comment"><%= post.comments.count %>件</div></td>
          <!--いいね数の表示-->
-         <div class="row post-like" style="glyphicon glyphicon-heart">いいね数：<%= post.likes.count %>件</div>
+         <td>
+         <div class= "glyphicon glyphicon-heart"><%= post.likes.count %>件</div>
+         </td>
+         <td>
          <%= link_to "詳細表示", post_path(post.id), class:"btn btn-default" %>
+         </td>
         <% end %>
+        </tr>
+        <tbody>
+        </table>
       <% else %>
        <p>投稿はまだありません</p>
       <% end %>
-
    </div>
  </div>
-<br>
-<br>
-<div class="row">
-   <div class="col-xs-12">
-     <%= link_to "お気に入り一覧", favorites_users_path %>
-   </div>
-</div>
+
+
+

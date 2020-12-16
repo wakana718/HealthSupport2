@@ -12,8 +12,27 @@
   </div>
 </div>
 
+<h2>Health Supportとは？</h2>
+<p>「毎日をちょっと健康に」をコンセプトに、あなたの健康管理をサポートするSNSです。<br>
+ダイエットや筋トレを頑張る仲間を見つけたり、毎日の体重を記録することもできます。</p>
 
 
+
+<h2>こんなことができます</h2>
+
+<h2>さあ、あなたも健康的な毎日を始めよう！</h2>
+<%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class:"btn btn-primary" %>
+<%= link_to 'ログイン', new_user_session_path, class:"btn btn-primary" %>
+
+<br>
+<br>
+
+<p>会員証登録がまだの方は︎</p
+><%= link_to "新規登録", new_user_registration_path, class:"btn btn-primary" %>
+
+
+<br>
+<br>
 
 <%= link_to "投稿一覧", posts_path, class:"btn btn-default" %>
 <%= link_to "ユーザー一覧", users_path, class:"btn btn-default" %>

@@ -1,4 +1,4 @@
-<h2>お気に入り一覧</h2>
+<h2>お気に入りした投稿</h2>
  <% if @fav_posts.exists? %>
 <table class="table">
         <thead>
@@ -23,7 +23,7 @@
           <td><%= attachment_image_tag post, :image, :fill, 100, 100, fallback: "no_image.jpg" %></td>
           <td><%= post.body %></td>
           <td><%= post.genre_status %></td>
-          <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
+          <td><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></td>
          <!--コメント数の表示-->
           <td><div class= "glyphicon glyphicon-comment">：<%= post.comments.count %>件</div></td>
          <!--いいね数の表示-->
