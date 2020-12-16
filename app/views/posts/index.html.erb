@@ -47,9 +47,9 @@
           <!--お気に入り登録・解除-->
           <td>
             <% if post.favorite_by?(current_user) %>
-                <%= link_to "お気に入り解除",post_favorites_path(post),method: :delete %>
+                <%= link_to "お気に入り済",post_favorites_path(post),method: :delete, class:"glyphicon glyphicon-star" %>
             <% else %>
-                <%= link_to "お気に入り登録",post_favorites_path(post),method: :post %>
+                <%= link_to "追加",post_favorites_path(post),method: :post, class:"glyphicon glyphicon-star-empty" %>
             <% end %>
           </td>
        　  <br>
@@ -71,8 +71,7 @@
 　        <th colspan="1"></th>
 　        <th>カテゴリ</th>
 　        <th>投稿日時</th>
-　        <th>コメント</th>
-　        <th>いいね</th>
+　        <th>コメントなど</th>
 　       </tr>
 　      </thead>
 　      <tbody>
@@ -92,17 +91,17 @@
          <!--いいね数の表示-->
       　   <td>
        　  <% if post.liked_by?(current_user) %>
-          いいね：<%= link_to post.likes.count, post_likes_path(post), method: :delete, local: true, class: "glyphicon glyphicon-heart"  %>
+          いいね：<%= link_to post.likes.count, post_likes_path(post), method: :delete, local: true, class:"glyphicon glyphicon-heart"  %>
        　  <% else %>
-          いいね：<%= link_to post.likes.count, post_likes_path(post), method: :post, local: true, class: "glyphicon glyphicon-heart-empty" %>
+          いいね：<%= link_to post.likes.count, post_likes_path(post), method: :post, local: true, class:"glyphicon glyphicon-heart-empty" %>
        　 <% end %>
           </td>
           <!--お気に入り登録・解除-->
           <td>
             <% if post.favorite_by?(current_user) %>
-                <%= link_to "お気に入り解除",post_favorites_path(post),method: :delete %>
+                <%= link_to "お気に入り済",post_favorites_path(post),method: :delete, class:"glyphicon glyphicon-star" %>
             <% else %>
-                <%= link_to "お気に入り登録",post_favorites_path(post),method: :post %>
+                <%= link_to "追加",post_favorites_path(post),method: :post, class:"glyphicon glyphicon-star-empty" %>
             <% end %>
           </td>
        　  <br>

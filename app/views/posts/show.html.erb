@@ -1,19 +1,20 @@
 <div class="container">
+     <h1>投稿詳細</h1>
  <div class="row">
-    <h1>投稿詳細</h1>
-      <div class="row post-image"><%= attachment_image_tag @post, :image, :fill, 100, 100, fallback: "no_image.jpg" %></div>
-      <div class="row post-body"><h6>コメント：</h6><%= @post.body %></div>
-      <div class="row post-genre"><h6>カテゴリ：</h6><%= @post.genre_status %></div>
-      <div class="row post-date"><h6>投稿日時：</h6><%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></div>
-      <div class="row post-destroy">
-      <% if current_user == @post.user %>
-      <%= link_to "投稿を削除", post_path(@post.id), method: :delete, data: {confirm: "本当に消しますか？"}, class:"btn btn-danger" %>
-      <% end %>
-      </div>
-      <br>
+<div class="col-xs-12">
+
+ <div class="row post-form" style="border-bottom:1px solid;">
+   <div class="col-xs-5">
+      <div class="row post-image"><%= attachment_image_tag @post, :image, :fill, 200, 200, fallback: "no_image.jpg" %></div><br><br>
       <!--コメント数の表示-->
       <div class="row post-comment">コメント数：<%= @post.comments.count %>件</div>
-      <!--いいね数の表示-->
+    </div>
+
+ <div class="col-xs-5">
+      <div class="row post-date"><%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></div>
+      <div class="row post-genre">カテゴリ：<%= @post.genre_status %></div>
+      <div class="row post-body"><%= @post.body %></div>
+       <!--いいね数の表示-->
       <div class="row post-like">
        <% if @post.liked_by?(current_user) %>
          いいね：<%= link_to @post.likes.count, post_likes_path(@post), method: :delete, local: true, class: "glyphicon glyphicon-heart"  %>
@@ -24,53 +25,57 @@
       <!--お気に入り登録・解除-->
       <div>
         <% if @post.favorite_by?(current_user) %>
-           <%= link_to "お気に入り解除",post_favorites_path(@post),method: :delete %>
+           <%= link_to "お気に入り済",post_favorites_path(@post),method: :delete, class:"glyphicon glyphicon-star" %>
         <% else %>
-            <%= link_to "お気に入り登録",post_favorites_path(@post),method: :post %>
+            <%= link_to "お気に入りに追加",post_favorites_path(@post),method: :post, class:"glyphicon glyphicon-star-empty" %>
         <% end %>
       </div>
- </div>
-</div>
+   </div>
 
-　　<!--コメント文の表示-->
-<ol>
-  <% @post.comments.each do |comment| %>
-    <li class="comment">
-      <%= link_to user_path(comment.user) do %>
-       <div class="comment-image"><%= attachment_image_tag(comment.user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg") %></div>
-       <div class="comment-text">
-       <div class="comment-author"><%= comment.user.name %></div>
+    <div class="col-xs-2">
+      <% if current_user == @post.user %>
+      <%= link_to "投稿を削除", post_path(@post.id), method: :delete, data: {confirm: "本当に消しますか？"}, class:"btn btn-danger" %>
       <% end %>
-       <span class="comment-date"><%= comment.created_at.strftime('%Y/%m/%d') %></span>
-       <div class="comment-body"><%= comment.comment %></div>
-       <% if comment.user == current_user %>
-        <div><%= link_to "コメントを削除", post_comment_path(comment.post, comment), method: :delete, class: "btn btn-danger pull-right" %></div>
-       <% end %>
-        </div>
+    </div>
+
+ </div>
+
+
+
+
+
+ <div class="row comment-form">
+      　　<!--コメント文の表示-->
+<ol style="list-style:none">
+  <% @post.comments.each do |comment| %>
+    <li class="row comment">
+      <div class="col-xs-4 comment-image">
+        <%= link_to user_path(comment.user) do %>
+         <div class="row comment-auher"><%= attachment_image_tag(comment.user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg") %></div>
+         <div class="row comment-auher"><%= comment.user.name %></div>
+         <% end %>
+      </div>
+      <div class="col-xs-8 comment-text">
+          <div class="row comment-date"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></div>
+          <div class="row comment-body"><%= comment.comment %></div>
+          <% if comment.user == current_user %>
+          <div class="row"><%= link_to "", post_comment_path(comment.post, comment), method: :delete, class: "glyphicon glyphicon-trash" %></div>
+          <% end %>
+      </div>
     </li>
   <% end %>
 </ol>
 
-
 <!--コメント入力フォーム-->
 <%= form_with(model:[@post, @comment], local: true) do |f| %>
-<!--バリデーション-->
-<% if @comment.errors.any? %>
-  <div id="error_explanation" class="alert alert-warning">
-    <ul class="mb-0">
-      <% @comment.errors.full_messages.each do |message| %>
-        <li>
-        <%= message %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+<%= render 'layouts/error_messages', model: f.object %><!--バリデーション-->
+<%= f.text_area :comment, rows:'3', class: "form-control",placeholder: "コメントをここに" %>
+<%= f.submit "送信", class: "col-xs-2 btn btn-default pull-right" %>
 <% end %>
 
-  <div class="row">
-    <div class="col-sm-12">
-      <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
-    </div>
-  </div>
-  <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
-<% end %>
+
+ </div>
+
+ </div>
+</div>
+</div>
