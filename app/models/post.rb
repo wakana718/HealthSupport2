@@ -10,7 +10,6 @@ class Post < ApplicationRecord
     where(genre_status: genre_status)
   }
 
- # コメント機能
  has_many :comments, dependent: :destroy
  has_many :likes, dependent: :destroy
 

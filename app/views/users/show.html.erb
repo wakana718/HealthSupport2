@@ -2,7 +2,7 @@
  <div class="row">
   <div class="col-xs-3">
     <h2>プロフィール</h2>
-    <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+      <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg" %>
    <table class="table, class:"col-xs-6"">
     <tr>
      <th><h5>ユーザーネーム： </h5></th>

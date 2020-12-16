@@ -27,12 +27,8 @@
          <!--コメント数の表示-->
           <td><div class= "glyphicon glyphicon-comment">：<%= post.comments.count %>件</div></td>
          <!--いいね数の表示-->
-      　   <td>
-       　  <% if post.liked_by?(current_user) %>
-          いいね：<%= link_to post.likes.count, post_likes_path(post), method: :delete, local: true, class: "glyphicon glyphicon-heart"  %>
-       　  <% else %>
-          いいね：<%= link_to post.likes.count, post_likes_path(post), method: :post, local: true, class: "glyphicon glyphicon-heart-empty" %>
-       　 <% end %>
+          <td id="likes_buttons<%= post.id %>" >
+          <%= render partial: 'likes/like', locals: { post: post} %>
           </td>
        　  <td><%= link_to "詳細表示", post_path(post.id), class:"btn btn-default" %></td>
           <% end %>

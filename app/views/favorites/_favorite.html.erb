@@ -1,0 +1,6 @@
+<!--お気に入り登録・解除-->
+<% if post.favorite_by?(current_user) %>
+<%= link_to "お気に入り済",post_favorites_path(post),method: :delete, remote: true, class:"glyphicon glyphicon-star" %>
+<% else %>
+<%= link_to "追加",post_favorites_path(post),method: :post, remote: true, class:"glyphicon glyphicon-star-empty" %>
+<% end %>
