@@ -1,22 +1,22 @@
-<h2>お気に入りした投稿</h2>
- <% if @fav_posts.exists? %>
-<table class="table">
+ <h1>いいね順ランキング</h1>
+　　　　<table class="table">
         <thead>
          <tr>
+          <th colspan="1"></th>
 　        <th>ユーザー</th>
 　        <th colspan="1"></th>
 　        <th>投稿</th>
 　        <th colspan="1"></th>
 　        <th>カテゴリ</th>
 　        <th>投稿日時</th>
-　        <th>コメント</th>
-　        <th>いいね</th>
+　        <th>コメントなど</th>
 　       </tr>
 　      </thead>
 　      <tbody>
-　        <% @fav_posts.each do |post| %>
+　        <% all_ranks.each.with_index(1) do |post, i| %>
 　       <tr>
           <%= link_to user_path(post.user) do %>
+          <td> 第<%= i %>位</td>
 		  <td><%= attachment_image_tag(post.user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpeg") %></td>
 		  <td><%= post.user.name %></td>
 	   　 <% end %>
@@ -29,16 +29,23 @@
          <!--いいね数の表示-->
       　   <td>
        　  <% if post.liked_by?(current_user) %>
-          いいね：<%= link_to post.likes.count, post_likes_path(post), method: :delete, local: true, class: "glyphicon glyphicon-heart"  %>
+          いいね：<%= link_to post.likes.count, post_likes_path(post), method: :delete, local: true, class:"glyphicon glyphicon-heart"  %>
        　  <% else %>
-          いいね：<%= link_to post.likes.count, post_likes_path(post), method: :post, local: true, class: "glyphicon glyphicon-heart-empty" %>
+          いいね：<%= link_to post.likes.count, post_likes_path(post), method: :post, local: true, class:"glyphicon glyphicon-heart-empty" %>
        　 <% end %>
           </td>
+          <!--お気に入り登録・解除-->
+          <td>
+            <% if post.favorite_by?(current_user) %>
+                <%= link_to "お気に入り済",post_favorites_path(post),method: :delete, class:"glyphicon glyphicon-star" %>
+            <% else %>
+                <%= link_to "追加",post_favorites_path(post),method: :post, class:"glyphicon glyphicon-star-empty" %>
+            <% end %>
+          </td>
+       　  <br>
        　  <td><%= link_to "詳細表示", post_path(post.id), class:"btn btn-default" %></td>
           <% end %>
          </tr>
         <tbody>
        </table>
-      <% else %>
-       <p>お気に入りした投稿はまだありません</p>
-      <% end %>
+

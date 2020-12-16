@@ -13,6 +13,10 @@
    </div>
   </div>
 </div>
+
+<%= link_to "投稿一覧", posts_path, class:"btn btn-default" %>
+<%= link_to "ユーザー一覧", users_path, class:"btn btn-default" %>
+
 <div class="row">
 <h2>Health Supportとは？</h2>
 <p>「毎日をちょっと健康に」をコンセプトに、あなたの健康管理をサポートするSNSです。<br>
@@ -29,10 +33,12 @@
 <%= link_to 'ログイン', new_user_session_path, class:"btn btn-primary" %>｜
 <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class:"btn btn-primary" %>
 </div>
-<br>
-<br>
 
-<%= link_to "投稿一覧", posts_path, class:"btn btn-default" %>
-<%= link_to "ユーザー一覧", users_path, class:"btn btn-default" %>
+<div class="row">
+<%= render 'posts/rank', all_ranks: @all_ranks %>
+</div>
+
+
+
 
 </div>
