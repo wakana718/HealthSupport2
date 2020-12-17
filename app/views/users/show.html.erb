@@ -2,7 +2,7 @@
  <div class="row">
   <div class="col-xs-3">
     <h2>プロフィール</h2>
-      <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg" %>
+      <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, class: "img-circle", fallback: "no_image.jpg" %>
    <table class="table, class:"col-xs-6"">
     <tr>
      <th><h5>ユーザーネーム： </h5></th>
@@ -27,7 +27,7 @@
      <th><%= link_to  "プロフィールを編集", edit_user_path(@user), class:"col-xs-12 btn btn-primary" %></th>
     </tr>
     <tr>
-     <th><%= link_to  "アカウントを削除", user_registration_path(@user), method: :DELETE, class:"col-xs-12 btn btn-danger" %></th>
+     <th><%= link_to  "アカウントを削除", user_registration_path, method: :DELETE, data: {confirm: "本当に退会しますか？"}, class:"col-xs-12 btn btn-danger" %></th>
     </tr>
     <% end %>
 

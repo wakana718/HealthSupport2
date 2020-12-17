@@ -19,8 +19,8 @@ class Post < ApplicationRecord
  end
 
  # お気に入り機能
- has_many :favorites
- has_many :users, through: :favorites
+ has_many :favorites, dependent: :destroy
+ has_many :users, through: :favorites, dependent: :destroy
 
  # お気に入りの重複防止
  def favorite_by?(user)

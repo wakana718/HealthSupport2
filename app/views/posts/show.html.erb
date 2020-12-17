@@ -5,7 +5,7 @@
 
  <div class="row post-form" style="border-bottom:1px solid;">
    <div class="col-xs-5">
-      <div class="row post-image"><%= attachment_image_tag @post, :image, :fill, 200, 200, fallback: "no_image.jpg" %></div><br><br>
+      <div class="row post-image"><%= attachment_image_tag @post, :image, :fill, 240, 200, fallback: "no-image.png" %></div><br><br>
       <!--コメント数の表示-->
       <div class="row post-comment">コメント数：<%= @post.comments.count %>件</div>
     </div>
@@ -14,23 +14,31 @@
       <div class="row post-date"><%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></div>
       <div class="row post-genre">カテゴリ：<%= @post.genre_status %></div>
       <div class="row post-body"><%= @post.body %></div>
-      <div class="row post-like">
+      <div class="row post-disposal">
         <!--いいね数の表示-->
-        <div id="likes_buttons<%= @post.id %>" >
-          <%= render partial: 'likes/like', locals: { post: @post} %>
+        <div class="col-xs-2">
+          <div id="likes_buttons<%= @post.id %>" >
+            <%= render 'likes/like', { post: @post} %>
+          </div>
         </div>
+        <div class="col-xs-2">
+      　<!--お気に入り登録・解除-->
+          <div id="favorites_buttons<%= @post.id %>" >
+           <%= render 'favorites/favorite', { post: @post} %>
+          </div>
+        </div>
+        <% if current_user == @post.user %>
+        <div class="col-xs-2">
+          <%= link_to "", edit_post_path(@post.id), class:"glyphicon glyphicon-pencil" %>
+        </div>
+        <div class="col-xs-2">
+          <%= link_to "", post_path(@post.id), method: :delete, data: {confirm: "本当に消しますか？"}, class:"glyphicon glyphicon-trash" %>
+        </div>
+        <% end %>
       </div>
-      <!--お気に入り登録・解除-->
-      <div id="favorites_buttons<%= @post.id %>" >
-        <%= render partial: 'favorites/favorite', locals: { post: @post} %>
-      </div>
-   </div>
+  </div>
 
-    <div class="col-xs-2">
-      <% if current_user == @post.user %>
-      <%= link_to "投稿を削除", post_path(@post.id), method: :delete, data: {confirm: "本当に消しますか？"}, class:"btn btn-danger" %>
-      <% end %>
-    </div>
+
 
  </div>
 

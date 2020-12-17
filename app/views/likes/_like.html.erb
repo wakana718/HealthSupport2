@@ -1,6 +1,6 @@
 <!--いいねの表示-->
 <% if post.liked_by?(current_user) %>
-  いいね：<%= link_to post.likes.count, post_likes_path(post), method: :delete, remote: true, class: "glyphicon glyphicon-heart"  %>
+  <%= link_to post.likes.count, post_likes_path(post), method: :delete, remote: true, class: "glyphicon glyphicon-heart"  %>
 <% else %>
-  いいね：<%= link_to post.likes.count, post_likes_path(post), method: :post, remote: true, class: "glyphicon glyphicon-heart-empty" %>
+  <%= link_to post.likes.count, post_likes_path(post), method: :post, remote: true, class: "glyphicon glyphicon-heart-empty" %>
 <% end %>

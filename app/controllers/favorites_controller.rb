@@ -2,18 +2,15 @@ class FavoritesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    if Favorite.create(user_id: current_user.id,post_id: params[:post_id])
-    else
-      redirect_to root_path
-    end
+    @post = Post.find(params[:post_id])
+    favorite = current_user.favorites.new(post_id: @post.id)
+    favorite.save
   end
 
   def destroy
-    if favorite=Favorite.find_by(user_id: current_user.id,post_id: params[:post_id])
-      favorite.delete
-    else
-      redirect_to root_path
-    end
+    @post = Post.find(params[:post_id])
+    favorite = current_user.favorites.find_by(post_id: @post.id)
+    favorite.destroy
   end
 
 end

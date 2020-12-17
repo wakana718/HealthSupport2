@@ -1,40 +1,38 @@
 <h2>お気に入りした投稿</h2>
  <% if @fav_posts.exists? %>
 <table class="table">
-        <thead>
-         <tr>
-　        <th>ユーザー</th>
-　        <th colspan="1"></th>
-　        <th>投稿</th>
-　        <th colspan="1"></th>
-　        <th>カテゴリ</th>
-　        <th>投稿日時</th>
-　        <th>コメント</th>
-　        <th>いいね</th>
-　       </tr>
-　      </thead>
-　      <tbody>
-　        <% @fav_posts.each do |post| %>
-　       <tr>
-          <%= link_to user_path(post.user) do %>
-		  <td><%= attachment_image_tag(post.user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpeg") %></td>
-		  <td><%= post.user.name %></td>
-	   　 <% end %>
-          <td><%= attachment_image_tag post, :image, :fill, 100, 100, fallback: "no_image.jpg" %></td>
-          <td><%= post.body %></td>
-          <td><%= post.genre_status %></td>
-          <td><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></td>
-         <!--コメント数の表示-->
-          <td><div class= "glyphicon glyphicon-comment">：<%= post.comments.count %>件</div></td>
-         <!--いいね数の表示-->
-          <td id="likes_buttons<%= post.id %>" >
-          <%= render partial: 'likes/like', locals: { post: post} %>
-          </td>
-       　  <td><%= link_to "詳細表示", post_path(post.id), class:"btn btn-default" %></td>
-          <% end %>
-         </tr>
-        <tbody>
-       </table>
-      <% else %>
-       <p>お気に入りした投稿はまだありません</p>
+  <thead>
+   <tr>
+     <th>ユーザー</th>
+     <th colspan="1"></th>
+     <th>投稿</th>
+     <th colspan="1"></th>
+     <th>カテゴリ</th>
+     <th>投稿日時</th>
+     <th>コメント</th>
+     <th>いいね</th>
+    </tr>
+  </thead>
+  <tbody>
+   <% @fav_posts.each do |post| %>
+    <tr>
+      <%= link_to user_path(post.user) do %>
+     <td><%= attachment_image_tag(post.user, :profile_image, :fill, 50, 50, class: "img-circle", fallback: "no-image-mini.jpeg") %></td>
+     <td><%= post.user.name %></td>
       <% end %>
+     <td><%= attachment_image_tag post, :image, :fill, 100, 100, fallback: "no_image.jpg" %></td>
+     <td><%= post.body %></td>
+     <td><%= post.genre_status %></td>
+     <td><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+      <!--コメント数の表示-->
+     <td><div class= "glyphicon glyphicon-comment">：<%= post.comments.count %>件</div></td>
+      <!--いいね数の表示-->
+     <td id="likes_buttons<%= post.id %>" ><%= render 'likes/like', { post: post} %></td>
+     <td><%= link_to "詳細表示", post_path(post.id), class:"btn btn-default" %></td>
+   <% end %>
+    </tr>
+  <tbody>
+</table>
+ <% else %>
+ <p>お気に入りした投稿はまだありません</p>
+ <% end %>
