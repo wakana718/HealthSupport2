@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   root 'users#top'
-# 　ゲストユーザーは削除できないよう設定するため
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }

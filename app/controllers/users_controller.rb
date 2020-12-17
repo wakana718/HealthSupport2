@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:top]
   before_action :current_user, only: [:edit, :update]
+  before_action :check_guest, only: %i[update destroy]
 
   def top
     # ランキング機能
@@ -50,6 +51,14 @@ class UsersController < ApplicationController
  private
   def user_params
     params.require(:user).permit(:name, :profile_image, :intoduction)
+  end
+
+
+
+  def check_guest
+    if current_user.email == 'guest@example.com' || current_user.name == 'guest'
+      redirect_to root_path, alert: 'ゲストユーザーの編集・削除はできません。'
+    end
   end
 
 end
