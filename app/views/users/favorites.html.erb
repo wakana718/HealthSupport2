@@ -16,10 +16,16 @@
   <tbody>
    <% @fav_posts.each do |post| %>
     <tr>
+     <td>
       <%= link_to user_path(post.user) do %>
-     <td><%= attachment_image_tag(post.user, :profile_image, :fill, 50, 50, class: "img-circle", fallback: "no-image-mini.jpeg") %></td>
-     <td><%= post.user.name %></td>
+        <%= attachment_image_tag(post.user, :profile_image, :fill, 50, 50, class: "img-circle", fallback: "no-image-mini.jpeg") %>
       <% end %>
+     </td>
+     <td>
+      <%= link_to user_path(post.user) do %>
+        <%= post.user.name %>
+      <% end %>
+     </td>
      <td><%= attachment_image_tag post, :image, :fill, 100, 100, fallback: "no_image.jpg" %></td>
      <td><%= post.body %></td>
      <td><%= post.genre_status %></td>

@@ -30,7 +30,11 @@
           <%= attachment_image_tag(post.user, :profile_image, :fill, 50, 50, class: "img-circle", fallback: "no-image-mini.jpeg") %>
         <% end %>
       </td>
-      <td style="width: 7%;"><%= post.user.name %></td>
+      <td style="width: 7%;">
+        <%= link_to user_path(post.user) do %>
+          <%= post.user.name %>
+        <% end %>
+      </td>
       <td><%= attachment_image_tag post, :image, :fill, 120, 100, fallback: "no-image.png" %></td>
       <td><%= post.body %></td>
       <td><%= post.genre_status %></td>
