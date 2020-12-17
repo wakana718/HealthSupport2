@@ -1,0 +1,38 @@
+<h1>体重の記録</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>体重</th>
+      <th>メモ</th>
+      <th>時間</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @records.each do |record| %>
+      <tr>
+        <td><%= record.weight %>kg</td>
+        <td><%= record.memo %></td>
+        <td><%= record.start_time.strftime("%Y-%m-%d %H:%M") %></td>
+        <td><%= link_to 'Show', record_path(current_user) %></td>
+        <td><%= link_to 'Edit', edit_record_path(record.id) %></td>
+        <td><%= link_to 'Destroy',record_path(record.id), method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<%= link_to '体重を記録する', new_record_path %>
+
+<%= month_calendar events: @records do |date, records| %>
+  <%= date.day %>
+
+  <% records.each do |record| %>
+    <div>
+      <%= link_to record.weight, record %>
+    </div>
+  <% end %>
+<% end %>

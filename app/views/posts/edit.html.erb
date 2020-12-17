@@ -3,15 +3,20 @@
    <div class="col-xs-6">
      <h1>投稿を編集する</h1>
         <%= form_with model:@post, local:true do |f| %>
-      <h4>画像</h4>
-        <%= attachment_image_tag @post, :image, :fill, 240, 200, fallback: "no-image.jpg"%>
-      <h4>投稿文</h4>
-        <%= f.text_area :body, rows:'3', class:"col-xs-12"%>
-      <h4>カテゴリ</h4>
-        <%= f.select :genre_status, Post.genre_statuses.keys, {prompt: '選択してください'}, class: "form-control" %>
-      <%= f.submit "投稿を更新", class:"btn btn-default" %>
-      <%= link_to "キャンセル", post_path(current_user), class:"btn btn-default" %>
-    <% end %>
+         <div class="row">
+           <h4>画像</h4><%= attachment_image_tag @post, :image, :fill, 240, 200, fallback: "no-image.jpg"%>
+         </div>
+         <div class="row">
+           <h4>投稿文</h4><%= f.text_area :body, rows:'3', class:"col-xs-6"%>
+        </div>
+        <div class="row">
+           <h4>カテゴリ</h4><%= f.select :genre_status, Post.genre_statuses.keys, {prompt: '選択してください'}, class: "col-xs-6" %>
+        </div>
+        <div class="row">
+           <%= f.submit "投稿を更新", class:"col-xs-2 btn btn-default" %>
+           <%= link_to "キャンセル", post_path(current_user), class:"col-xs-2 btn btn-default" %>
+        </div>
+       <% end %>
    </div>
  </div>
 </div>

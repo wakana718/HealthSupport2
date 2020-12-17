@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_many :favorites #お気に入り
   #fav_postsはfavoriteのpost_idを使ってpostsテーブルと繋がる。fav_postsというテーブルはないのでsourceで参照するテーブルを指定。
   has_many :fav_posts, through: :favorites, source: :post, dependent: :destroy
+  has_many :records, dependent: :destroy
 
 
   # ユーザーをフォローする

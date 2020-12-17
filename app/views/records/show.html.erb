@@ -1,0 +1,17 @@
+<p>
+  <strong>体重</strong>
+  <%= @record.weight %>kg
+</p>
+
+<p>
+  <strong>時間</strong>
+  <%= @record.start_time.strftime("%Y-%m-%d %H:%M") %>
+</p>
+
+<p>
+  <strong>メモ</strong>
+  <%= @record.memo%>
+</p>
+
+<%= link_to 'Edit', edit_record_path(@record) %> |
+<%= link_to 'Back', records_path %>

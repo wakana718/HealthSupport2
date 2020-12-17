@@ -17,11 +17,13 @@ Rails.application.routes.draw do
     get :favorites, on: :collection #users/favorites
   end
 
-  resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+  resources :posts do
     resources :comments, only: [:create, :destroy]
     resource :likes, only: [:create, :destroy]
     resource :favorites, only: [:create, :destroy]
   end
+
+  resources :records
 
 
   post 'follow/:id' => 'relationships#follow', as: 'follow' # フォローする

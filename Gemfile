@@ -70,6 +70,7 @@ gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
 gem 'ransack'
 gem 'rails-i18n'
+gem 'simple_calendar', '~> 2.0'
 
 gem 'dotenv-rails'
 group :production do

@@ -14,7 +14,7 @@ class PostsController < ApplicationController
       redirect_to user_path(current_user), notice: "投稿しました！"
     else
        # 投稿に失敗した場合
-      flash.now[:alert] = '投稿に失敗しました'
+      flash.now[:alert] = '投稿できませんでした'
       render :new
     end
   end
@@ -54,7 +54,7 @@ class PostsController < ApplicationController
       redirect_to user_path(current_user), notice: "投稿が削除されました！"
     else
        # 削除に失敗した場合
-      flash.now[:alert] = '削除に失敗しました'
+      flash.now[:alert] = '投稿を削除できませんでした'
       render :show
     end
   end

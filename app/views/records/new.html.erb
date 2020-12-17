@@ -1,0 +1,23 @@
+<%= form_with(model: @record, local: true) do |form| %>
+
+  <div class="weight">
+    <%= form.label :weight %>
+    <%= form.text_field :weight %>
+  </div>
+
+    <div class="time">
+    <%= form.label :time %>
+    <%= form.datetime_select :start_time %>
+  </div>
+
+  <div class="memo">
+    <%= form.label :memo %>
+    <%= form.text_field :memo %>
+  </div>
+
+
+  <div class="submit">
+    <%= form.submit %>
+  </div>
+
+<% end %>
