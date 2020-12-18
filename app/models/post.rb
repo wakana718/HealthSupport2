@@ -13,6 +13,7 @@ class Post < ApplicationRecord
  has_many :comments, dependent: :destroy
  has_many :likes, dependent: :destroy
 
+
  # いいねの重複防止
  def liked_by?(user)
     likes.where(user_id: user.id).exists?

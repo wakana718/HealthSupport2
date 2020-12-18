@@ -7,7 +7,7 @@
 　  <tbody>
 　    <% @users.each do |user| %>
 　    <tr>
-       <td><%= attachment_image_tag user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg" %></td>
+       <td><%= attachment_image_tag user, :profile_image, :fill, 100, 100, class: "img-circle", fallback: "no_image.jpg" %></td>
        <td><%= user.name %></td>
        <td>投稿数：<%= user.posts.count %></td>
        <td>フォロー数：<%= user.follower.count %></td>

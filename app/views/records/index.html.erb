@@ -1,3 +1,6 @@
+<div class= "container">
+<div class= "row">
+<div class= "col-xs-12">
 <h1>体重の記録</h1>
 
 <table>
@@ -23,16 +26,31 @@
     <% end %>
   </tbody>
 </table>
-<br>
+</div>
+</div>
 
-<%= link_to '体重を記録する', new_record_path %>
 
+<div class= "row">
+<div class= "col-xs-4">
+
+ <h4>体重を記録する</h4>
+<%= render 'records/new', record: @record %>
+
+</div>
+
+<div class= "col-xs-8">
 <%= month_calendar events: @records do |date, records| %>
   <%= date.day %>
 
   <% records.each do |record| %>
     <div>
-      <%= link_to record.weight, record %>
+      <%= link_to record.weight, record %>kg
     </div>
   <% end %>
 <% end %>
+</div>
+</div>
+
+
+
+</div>

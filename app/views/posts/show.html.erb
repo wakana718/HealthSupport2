@@ -1,83 +1,87 @@
 <div class="container">
+  <div class="row">
+   <div class="col-xs-6 posts">
      <h1>投稿詳細</h1>
- <div class="row">
-<div class="col-xs-12">
-
- <div class="row post-form" style="border-bottom:1px solid;">
-   <div class="col-xs-5">
-      <div class="row post-image"><%= attachment_image_tag @post, :image, :fill, 240, 200, fallback: "no-image.png" %></div><br><br>
-      <!--コメント数の表示-->
-      <div class="row post-comment">コメント数：<%= @post.comments.count %>件</div>
-    </div>
-
- <div class="col-xs-5">
-      <div class="row post-date"><%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></div>
-      <div class="row post-genre">カテゴリ：<%= @post.genre_status %></div>
-      <div class="row post-body"><%= @post.body %></div>
-      <div class="row post-disposal">
-        <!--いいね数の表示-->
-        <div class="col-xs-2">
-          <div id="likes_buttons<%= @post.id %>" >
-            <%= render 'likes/like', { post: @post} %>
+        <div class="row post-form">
+          <div class="col-xs-6">
+            <div class="row post-image"><%= attachment_image_tag @post, :image, :fill, 240, 200, class:"img-rounded", fallback: "no-image.png" %></div><br><br>
+          </div>
+          <div class="col-xs-6">
+            <div class="row table">
+              <table class="table">
+               <tr>
+                 <th>投稿日時：<%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></th>
+               </tr>
+               <tr>
+                 <th>カテゴリ：<%= @post.genre_status %></th>
+               </tr>
+               <tr>
+                 <th><%= @post.body %></th>
+               </tr>
+               <tr><!--いいね数の表示-->
+                 <td id="likes_buttons<%= @post.id %>" >いいね：<%= render 'likes/like', { post: @post} %></td>
+               </tr>
+               <tr><!--お気に入り登録・解除-->
+                 <td id="favorites_buttons<%= @post.id %>" >お気に入り：<%= render 'favorites/favorite', { post: @post} %></td>
+               </tr>
+              </table>
+            </div>
+            <div class="row post-edit-destroy">
+               <% if current_user == @post.user %>
+              <div class="col-xs-5 pull-right">
+                <%= link_to "投稿を編集", edit_post_path(@post.id), class:"btn btn-primary btn-sm" %>
+              </div>
+              <div class="col-xs-5 pull-right">
+                <%= link_to "投稿を削除", post_path(@post.id), method: :delete, data: {confirm: "本当に消しますか？"}, class:"btn btn-danger btn-sm" %>
+              </div>
+               <% end %>
+            </div>
           </div>
         </div>
-        <div class="col-xs-2">
-      　<!--お気に入り登録・解除-->
-          <div id="favorites_buttons<%= @post.id %>" >
-           <%= render 'favorites/favorite', { post: @post} %>
-          </div>
-        </div>
-        <% if current_user == @post.user %>
-        <div class="col-xs-2">
-          <%= link_to "", edit_post_path(@post.id), class:"glyphicon glyphicon-edit" %>
-        </div>
-        <div class="col-xs-2">
-          <%= link_to "", post_path(@post.id), method: :delete, data: {confirm: "本当に消しますか？"}, class:"glyphicon glyphicon-trash" %>
-        </div>
-        <% end %>
-      </div>
-  </div>
+
+        <div class="row post-count-form" style="border-bottom:1px solid;">コメント数：<%= @post.comments.count %>件</div>
 
 
-
- </div>
-
-
-
-
-
- <div class="row comment-form">
+        <div class="row comment-form">
       　　<!--コメント文の表示-->
-<ol style="list-style:none">
-  <% @post.comments.each do |comment| %>
-    <li class="row comment">
-      <div class="col-xs-4 comment-image">
-        <%= link_to user_path(comment.user) do %>
-         <div class="row comment-auher"><%= attachment_image_tag(comment.user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg") %></div>
-         <div class="row comment-auher"><%= comment.user.name %></div>
-         <% end %>
-      </div>
-      <div class="col-xs-8 comment-text">
-          <div class="row comment-date"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></div>
-          <div class="row comment-body"><%= comment.comment %></div>
-          <% if comment.user == current_user %>
-          <div class="row"><%= link_to "", post_comment_path(comment.post, comment), method: :delete, class: "glyphicon glyphicon-trash" %></div>
-          <% end %>
-      </div>
-    </li>
-  <% end %>
-</ol>
+         <ol style="list-style:none">
+           <% @post.comments.each do |comment| %>
+          <li class="row comment">
+            <div class="col-xs-4 comment-image">
+             <%= link_to user_path(comment.user) do %>
+             <div class="row comment-auher"><%= attachment_image_tag(comment.user, :profile_image, :fill, 60, 60, class: "img-circle", fallback: "no_image.jpg") %></div>
+             <div class="row comment-auher"><%= comment.user.name %></div>
+             <% end %>
+            </div>
+            <div class="col-xs-8 comment-text">
+              <div class="row comment-date"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></div>
+              <div class="row comment-body"><%= comment.comment %></div>
+               <% if comment.user == current_user %>
+              <div class="row"><%= link_to "", post_comment_path(comment.post, comment), method: :delete, data: {confirm: "本当に消しますか？"}, class: "glyphicon glyphicon-trash" %></div>
+               <% end %>
+            </div>
+          </li>
+           <% end %>
+         </ol>
 
-<!--コメント入力フォーム-->
-<%= form_with(model:[@post, @comment], local: true) do |f| %>
-<%= render 'layouts/error_messages', model: f.object %><!--バリデーション-->
-<%= f.text_area :comment, rows:'3', class: "form-control",placeholder: "コメントをここに" %>
-<%= f.submit "送信", class: "col-xs-2 btn btn-default pull-right" %>
-<% end %>
+        <!--コメント入力フォーム-->
+        <%= form_with(model:[@post, @comment], local: true) do |f| %>
+          <%= render 'layouts/error_messages', model: f.object %><!--バリデーション-->
+          <%= f.text_area :comment, rows:'3', class: "form-control",placeholder: "コメントをここに" %>
+          <%= f.submit "送信", class: "col-xs-2 btn btn-default pull-right" %>
+        <% end %>
+       </div>
+   </div>
+
+   <div class="col-xs-6 likes">
+     <h2>この投稿にいいねした人</h2>
+   </div>
 
 
- </div>
 
- </div>
+
+  </div>
 </div>
-</div>
+
+
+

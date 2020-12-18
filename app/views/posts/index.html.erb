@@ -35,7 +35,7 @@
           <%= post.user.name %>
         <% end %>
       </td>
-      <td><%= attachment_image_tag post, :image, :fill, 120, 100, fallback: "no-image.png" %></td>
+      <td><%= attachment_image_tag post, :image, :fill, 120, 100, class:"img-rounded", fallback: "no-image.png" %></td>
       <td><%= post.body %></td>
       <td><%= post.genre_status %></td>
       <td><%= post.created_at.strftime('%Y/%m/%d') %></td>

@@ -20,6 +20,7 @@ class PostsController < ApplicationController
   end
 
   def index
+    @post = Post.new
     @posts = Post.all
     if params[:genre_status].present?
      @posts = @posts.get_by_genre_status params[:genre_status]
@@ -30,6 +31,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @comment = Comment.new
   end
+
 
   def edit
     @post = Post.find(params[:id])

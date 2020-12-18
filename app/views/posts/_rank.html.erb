@@ -21,7 +21,7 @@
              <td><%= attachment_image_tag(post.user, :profile_image, :fill, 50, 50, class: "img-circle", fallback: "no-image-mini.jpeg") %></td>
              <td><%= post.user.name %></td>
              <% end %>
-             <td><%= attachment_image_tag post, :image, :fill, 100, 100, fallback: "no_image.jpg" %></td>
+             <td><%= attachment_image_tag post, :image, :fill, 100, 100, class:"img-rounded", fallback: "no_image.jpg" %></td>
              <td><%= post.body %></td>
              <td><%= post.genre_status %></td>
              <td><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></td>

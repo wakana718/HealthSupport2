@@ -15,7 +15,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = @user.posts
-
   end
 
   def edit
@@ -47,6 +46,7 @@ class UsersController < ApplicationController
   def favorites
     @fav_posts = current_user.fav_posts
   end
+
 
  private
   def user_params

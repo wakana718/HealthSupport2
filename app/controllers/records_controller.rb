@@ -1,7 +1,6 @@
 class RecordsController < ApplicationController
-  def new
-    @record = Record.new
-  end
+  before_action :authenticate_user!
+  before_action :current_user
 
   def create
     @record = Record.new(record_params)
@@ -15,6 +14,7 @@ class RecordsController < ApplicationController
   end
 
   def index
+    @record = Record.new
     @records = Record.all
   end
 
@@ -49,7 +49,7 @@ class RecordsController < ApplicationController
   private
 
   def record_params
-    params.require(:record).permit(:weight, :memo, :start_time)
+    params.require(:record).permit(:weight, :memo, :start_time, :user_id)
   end
 
 

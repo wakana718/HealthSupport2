@@ -13,7 +13,10 @@ Rails.application.routes.draw do
     member do
      get :following, :followers #フォロー一覧・フォロワー一覧
     end
-    get :favorites, on: :collection #users/favorites
+
+    collection do
+    get :favorites #users/favorites
+    end
   end
 
   resources :posts do
