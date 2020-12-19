@@ -1,18 +1,17 @@
 <%= form_with(model: @record, local: true) do |form| %>
-
-  <div class="weight">
-    <%= form.label :weight %>
-    <%= form.text_field :weight %>
-  </div>
-
     <div class="time">
-    <%= form.label :time %>
+    <%= form.label :日時 %>
     <%= form.datetime_select :start_time %>
   </div>
 
+  <div class="weight">
+    <%= form.label :体重 %>
+    <%= form.text_field :weight %>
+  </div>
+
   <div class="memo">
-    <%= form.label :memo %>
-    <%= form.text_field :memo %>
+    <%= form.label :メモ %>
+    <%= form.text_area :memo %>
   </div>
 
 

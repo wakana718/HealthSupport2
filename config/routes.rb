@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     end
 
     collection do
-    get :favorites, :home
+    get :favorites
     end
   end
 

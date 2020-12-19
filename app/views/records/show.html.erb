@@ -1,11 +1,11 @@
 <p>
-  <strong>体重</strong>
-  <%= @record.weight %>kg
+  <strong>日時</strong>
+  <%= @record.start_time.strftime("%Y-%m-%d %H:%M") %>
 </p>
 
 <p>
-  <strong>時間</strong>
-  <%= @record.start_time.strftime("%Y-%m-%d %H:%M") %>
+  <strong>体重</strong>
+  <%= @record.weight %>kg
 </p>
 
 <p>

@@ -9,10 +9,10 @@
 <br>
 <br>
 
-<table>
+<table class="table table-bordered">
   <thead>
     <tr>
-      <th>時間</th>
+      <th>日時</th>
       <th>体重</th>
       <th>メモ</th>
 
@@ -23,7 +23,6 @@
     <% @records.each do |record| %>
       <tr>
         <td><%= record.start_time.strftime("%Y/%m/%d %H:%M") %></td>
-        <td colspan="1"></td>
         <td><%= record.weight %>kg</td>
         <td><%= record.memo %></td>
       </tr>
