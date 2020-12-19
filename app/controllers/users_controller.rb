@@ -8,6 +8,15 @@ class UsersController < ApplicationController
     @all_ranks = Post.find(Like.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
   end
 
+  def home
+    @users = User.all
+    @post = Post.new
+    @posts = Post.all
+    if params[:genre_status].present?
+     @posts = @posts.get_by_genre_status params[:genre_status]
+    end
+  end
+
   def index
     @users = User.all
   end

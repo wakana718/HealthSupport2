@@ -12,7 +12,7 @@
   <header>
   <div class="navbar navbar-default">
    <div class="container">
-    <%= link_to root_path do %>
+    <%= link_to home_users_path do %>
   <%= image_tag "logo3.png" %>
 <% end %>
 
@@ -26,7 +26,7 @@
       </li>
       <li class="list-unstyled">
         <span class="glyphicon glyphicon-star" aria-hidden="true">
-        <%= link_to 'お気に入り', favorites_users_path(current_user.id) %>
+        <%= link_to 'home', home_users_path %>
         </span>
       </li>
       <li class="list-unstyled">
@@ -36,7 +36,7 @@
       </li>
       <li class="list-unstyled">
         <span class="glyphicon glyphicon-list-alt" aria-hidden="true">
-        <%= link_to 'カレンダー', records_path %>
+        <%= link_to '体重を記録', records_path %>
         </span>
       </li>
       <li class="list-unstyled">
@@ -85,7 +85,7 @@
 
   <footer class="footer">
     <div class="container">
-      <p class="text-muted text-center">COPYRIGHT ©2020 Health Support All Rights Reserved.</p>
+      <p class="text-muted">COPYRIGHT ©2020 Health Support All Rights Reserved.</p>
     </div>
   </footer>
 

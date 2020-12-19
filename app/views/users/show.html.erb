@@ -21,6 +21,9 @@
      <th><%= link_to  "プロフィールを編集", edit_user_path(@user), class:"col-xs-10 btn btn-primary" %></th>
     </tr>
     <tr>
+     <th><%= link_to 'お気に入りした投稿', favorites_users_path, class:"col-xs-10 btn btn-success" %></th>
+    </tr>
+    <tr>
      <th><%= link_to  "アカウントを削除", user_registration_path, method: :DELETE, data: {confirm: "本当に退会しますか？"}, class:"col-xs-10 btn btn-danger" %></th>
     </tr>
     <% end %>

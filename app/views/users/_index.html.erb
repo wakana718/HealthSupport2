@@ -1,0 +1,31 @@
+<h1>ユーザー一覧</h1>
+  <table class="table">
+    <thead>
+      <th>ユーザー</th>
+      <th colspan="1"></th>
+      <th>投稿数</th>
+      <th>フォロー・フォロワー</th>
+    </thead>
+    <tbody>
+     <% users.each do |user| %>
+      <tr>
+       <td><%= attachment_image_tag user, :profile_image, :fill, 70, 70, class: "img-circle", fallback: "no_image.jpg" %></td>
+       <td><%= user.name %></td>
+       <td class="glyphicon glyphicon-pencil">：<%= user.posts.count %></td>
+       <td>フォロー数：<%= user.follower.count %></td>
+       <td>フォロワー数：<%= user.followed.count %></td>
+       <td>
+        <% unless user == current_user %>
+         <% if current_user.following?(user) %>
+          <%= link_to 'フォロー外す', unfollow_path(user.id), method: :POST %>
+         <% else %>
+          <%= link_to 'フォローする', follow_path(user.id), method: :POST %>
+         <% end %>
+        <% end %>
+       </td>
+       <td><%= link_to "詳細表示", user_path(user), class:"btn btn-default" %></td>
+      </tr>
+       <% end %>
+    </tbody>
+  </table>
+

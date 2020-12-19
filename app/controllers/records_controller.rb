@@ -1,6 +1,5 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user!
-  before_action :current_user
 
   def create
     @record = Record.new(record_params)
@@ -16,6 +15,7 @@ class RecordsController < ApplicationController
   def index
     @record = Record.new
     @records = Record.all
+
   end
 
   def show
@@ -29,7 +29,7 @@ class RecordsController < ApplicationController
   def update
     @record = Record.find(params[:id])
     if @record.update(record_params)
-      redirect_to records_path(@record.id), notice: "記録を更新しました！"
+      redirect_to record_path(@record.id), notice: "記録を更新しました！"
     else
       flash.now[:alert] = '記録を更新できませんでした'
       render :edit
@@ -39,7 +39,7 @@ class RecordsController < ApplicationController
   def destroy
     @record = Record.find(params[:id])
     if @record.destroy
-     redirect_to record_path(current_user), notice:"記録を削除しました！"
+     redirect_to records_path, notice:"記録を削除しました！"
     else
      flash.now[:alert] = '記録を削除できませんでした'
      render :show

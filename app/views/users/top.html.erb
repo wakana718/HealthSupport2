@@ -14,8 +14,6 @@
   </div>
 </div>
 
-<%= link_to "投稿一覧", posts_path, class:"btn btn-default" %>
-<%= link_to "ユーザー一覧", users_path, class:"btn btn-default" %>
 
 <div class="row">
 <h2>Health Supportとは？</h2>
@@ -24,20 +22,32 @@
 </div>
 
 <div class="row">
-<h2>こんなことができます</h2>
+<h2>何ができるの？</h2>
+<p>・体重の記録<br>
+・フォロー機能<br>
+・お気に入り機能<br>
+</p>
+<br>
+<br>
+
 </div>
 
+<div class="jumbotron">
 <div class="row">
 <h2>さあ、あなたも健康的な毎日を始めよう！</h2>
 <%= link_to "新規登録", new_user_registration_path, class:"btn btn-primary" %>
 <%= link_to 'ログイン', new_user_session_path, class:"btn btn-primary" %>｜
 <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class:"btn btn-primary" %>
+<br>
+<br>
+
+<p>ログインすると仲間の投稿が見れたり、自分も投稿できるようになります。</p>
+<br>
+<br>
+</div>
 </div>
 
-<div class="row">
 <%= render 'posts/rank', all_ranks: @all_ranks %>
-</div>
-
 
 
 

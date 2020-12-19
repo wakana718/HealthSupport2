@@ -23,6 +23,7 @@ class PostsController < ApplicationController
     @post = Post.new
     @posts = Post.all
     if params[:genre_status].present?
+       #byebug
      @posts = @posts.get_by_genre_status params[:genre_status]
     end
   end
@@ -30,6 +31,13 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
+
+    @users = User.find(@post.likes.pluck(:user_id))
+
+    likes = Like.where(post_id: params[:id])
+    @users = User.find(likes.pluck(:user_id))
+
+
   end
 
 
@@ -61,7 +69,7 @@ class PostsController < ApplicationController
     end
   end
 
-  # 投稿データのストロングパラメータ
+
   private
   def post_params
     params.require(:post).permit(:body, :image, :user_id, :genre_status)

@@ -1,0 +1,16 @@
+<div class="container">
+ <div class="row">
+   <div class="col-xs-3">
+       <%= form_with model:@record, local:true do |f| %>
+         <h4>体重</h4>
+         <%= f.text_field :weight %>
+         <h4>メモ</h4>
+         <%= f.text_area :memo %>
+         <%= f.submit "記録を更新", class:"btn btn-success" %>
+         <%= link_to :back do %>
+         <div class= "btn btn-default pull-right">前のページに戻る</div>
+    　    <% end %>
+       <% end %>
+   </div>
+ </div>
+</div>

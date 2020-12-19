@@ -9,13 +9,13 @@ Rails.application.routes.draw do
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :users, only: [:show, :edit, :update ,:index] do
+  resources :users, only: [:show, :edit, :update, :index] do
     member do
      get :following, :followers #フォロー一覧・フォロワー一覧
     end
 
     collection do
-    get :favorites #users/favorites
+    get :favorites, :home
     end
   end
 

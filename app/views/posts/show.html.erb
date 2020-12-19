@@ -75,12 +75,17 @@
 
    <div class="col-xs-6 likes">
      <h2>この投稿にいいねした人</h2>
+     <%= render 'posts/liked', users: @users %>
    </div>
 
-
-
-
   </div>
+
+  <div class="row">
+    <%= link_to :back do %>
+      <div class= "btn btn-default pull-right">前のページに戻る</div>
+    <% end %>
+  </div>
+
 </div>
 
 
