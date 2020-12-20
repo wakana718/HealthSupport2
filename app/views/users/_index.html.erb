@@ -14,18 +14,13 @@
        <td class="glyphicon glyphicon-pencil">：<%= user.posts.count %></td>
        <td>フォロー数：<%= user.follower.count %></td>
        <td>フォロワー数：<%= user.followed.count %></td>
-       <td>
-        <% unless user == current_user %>
-         <% if current_user.following?(user) %>
-          <%= link_to 'フォロー外す', unfollow_path(user.id), method: :POST %>
-         <% else %>
-          <%= link_to 'フォローする', follow_path(user.id), method: :POST %>
+         <% unless user == current_user %>
+       <td id="follow_buttons<%= user.id %>" ><%= render 'relationships/relationship', { user: user} %></td>
          <% end %>
-        <% end %>
-       </td>
        <td><%= link_to "詳細表示", user_path(user), class:"btn btn-default" %></td>
       </tr>
        <% end %>
+       <%= paginate users %>
     </tbody>
   </table>
 

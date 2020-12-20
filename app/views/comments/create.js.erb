@@ -1,0 +1,3 @@
+$("#comment-list<%= @post.id %>").html("<%= j(render 'comments/comment-list', post: @post, comment: @comment) %>");
+$("#comment-count<%= @post.id %>").html("<%= j(render 'comments/comment-count', post: @post) %>");
+$('.form-control').val('') 　<!--フォームの中身をリセットする処理-->

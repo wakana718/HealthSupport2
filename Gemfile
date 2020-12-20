@@ -71,6 +71,8 @@ gem "refile-mini_magick"
 gem 'ransack'
 gem 'rails-i18n'
 gem 'simple_calendar', '~> 2.0'
+gem 'kaminari','~> 1.2.1'
+
 
 gem 'dotenv-rails'
 group :production do

@@ -38,38 +38,13 @@
             </div>
           </div>
         </div>
-
-        <div class="row post-count-form" style="border-bottom:1px solid;">コメント数：<%= @post.comments.count %>件</div>
-
-
-        <div class="row comment-form">
-      　　<!--コメント文の表示-->
-         <ol style="list-style:none">
-           <% @post.comments.each do |comment| %>
-          <li class="row comment">
-            <div class="col-xs-4 comment-image">
-             <%= link_to user_path(comment.user) do %>
-             <div class="row comment-auher"><%= attachment_image_tag(comment.user, :profile_image, :fill, 60, 60, class: "img-circle", fallback: "no_image.jpg") %></div>
-             <div class="row comment-auher"><%= comment.user.name %></div>
-             <% end %>
-            </div>
-            <div class="col-xs-8 comment-text">
-              <div class="row comment-date"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></div>
-              <div class="row comment-body"><%= comment.comment %></div>
-               <% if comment.user == current_user %>
-              <div class="row"><%= link_to "", post_comment_path(comment.post, comment), method: :delete, data: {confirm: "本当に消しますか？"}, class: "glyphicon glyphicon-trash" %></div>
-               <% end %>
-            </div>
-          </li>
-           <% end %>
-         </ol>
-
-        <!--コメント入力フォーム-->
-        <%= form_with(model:[@post, @comment], local: true) do |f| %>
-          <%= render 'layouts/error_messages', model: f.object %><!--バリデーション-->
-          <%= f.text_area :comment, rows:'3', class: "form-control",placeholder: "コメントをここに" %>
-          <%= f.submit "送信", class: "col-xs-2 btn btn-default pull-right" %>
-        <% end %>
+        <!--コメント数の表示-->
+        <div id="comment-count<%= @post.id %>" class="row post-count-form" style="border-bottom:1px solid;">
+          <%= render "comments/comment-count", post: @post %>
+        </div>
+        <!--コメント文の表示(と削除ボタン)とコメントフォーム欄-->
+        <div id="comment-list<%= @post.id %>" class="row comment-form">
+      　　<%= render "comments/comment-list", post: @post, comment: Comment.new %>
        </div>
    </div>
 

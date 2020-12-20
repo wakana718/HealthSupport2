@@ -51,9 +51,13 @@
       </td>
       <td><%= link_to "詳細表示", post_path(post.id), class:"btn btn-default" %></td>
       <% end %>
+      <%= paginate posts %>
     </tr>
   <tbody>
 </table>
+
+
+
 <% if posts.empty? %>
   投稿がありません
 <% end %>

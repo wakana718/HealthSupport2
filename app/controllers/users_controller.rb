@@ -7,9 +7,9 @@ class UsersController < ApplicationController
     # ランキング機能
     @all_ranks = Post.find(Like.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
 
-    @users = User.all
+    @users = User.page(params[:page]).reverse_order
     @post = Post.new
-    @posts = Post.all
+    @posts = Post.page(params[:page]).reverse_order
     if params[:genre_status].present?
      @posts = @posts.get_by_genre_status params[:genre_status]
     end
