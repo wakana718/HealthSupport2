@@ -13,36 +13,36 @@
       <header>
         <nav class="navbar navbar-default navbar-fixed-top">
           <div class="container-fluid">
-            <div class="navbar-header" style="margin-left: 100px;">
+            <div class="navbar-header data-turbolinks: false " style="margin-left: 100px;">
               <%= link_to root_path do %>
                 <%= image_tag "logo.png"  %>
               <% end %>
             </div>
-            <ul class="nav navbar-nav navbar-right" style="font-size: 18px; position: absolute; top: 60px; right: 60px;">
+            <ul class="nav navbar-nav navbar-right" style="font-size: 18px; position: absolute; top: 60px; right: 60px; letter-spacing: 0.1rem;">
               <% if user_signed_in? %>
-              <li class="">
+              <li class="" style="margin-right: 25px;">
                  <span class="glyphicon glyphicon-home" aria-hidden="true"><%= link_to 'TOP', root_path, "data-turbolinks": false  %></span>
               </li>
-              <li class="list-unstyled">
+              <li class="list-unstyled" style="margin-right: 25px;">
                 <span class="glyphicon glyphicon-user" aria-hidden="true"><%= link_to 'マイページ', user_path(current_user.id) %></span>
               </li>
-              <li class="list-unstyled">
+              <li class="list-unstyled" style="margin-right: 25px;">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"><%= link_to '投稿する', new_post_path %></span>
               </li>
-              <li class="list-unstyled">
+              <li class="list-unstyled" style="margin-right: 25px;">
                 <span class="glyphicon glyphicon-list-alt" aria-hidden="true"><%= link_to '体重を記録', records_path %></span>
               </li>
-              <li class="list-unstyled">
+              <li class="list-unstyled" style="margin-right: 25px;">
                 <span class="glyphicon glyphicon-log-out" aria-hidden="true"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></span>
               </li>
               <% else %>
-              <li class="">
+              <li class="" style="margin-right: 25px;">
                  <span class="glyphicon glyphicon-home" aria-hidden="true"><%= link_to 'TOP', root_path %></span>
               </li>
-              <li class="">
+              <li class="" style="margin-right: 25px;">
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"><%= link_to "新規登録", new_user_registration_path %></span>
               </li>
-              <li class="">
+              <li class="" style="margin-right: 25px;">
                 <span class="glyphicon glyphicon-log-in" aria-hidden="true"><%= link_to "ログイン", new_user_session_path %></span>
               </li>
               <% end %>
