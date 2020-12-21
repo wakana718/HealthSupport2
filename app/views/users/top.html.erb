@@ -1,6 +1,5 @@
-<div class="container">
- <div class="row">
-  <div id="box">
+
+  <div id="box" style="margin-bottom: 50px;">
    <div id="images">
     <div class="image1"></div>
     <div class="image2"></div>
@@ -12,21 +11,38 @@
     <div class="image8"></div>
    </div>
   </div>
+
+<div class="container">
+<div class="row" style="text-align:center; letter-spacing: 0.2rem; margin-bottom: 50px;">
+<h2><span>Health Supportとは？</span></h2>
+<h4 style="line-height: 5rem;"><span class="under" style= "background: linear-gradient(transparent 70%, #ffc0cb 70%);">
+ 「あなたの毎日をちょっと健康に」</span>をコンセプトに、あなたの健康管理をサポートするSNSです。<br>
+ダイエットや筋トレを頑張る仲間を見つけたり、毎日の体重を記録することもできます。
+</h4>
+</div>
+
+<div class="row" style="margin-bottom: 50px;">
+<h2 style="text-align:center; margin-bottom: 50px;">何ができるの？</h2>
+
+<div class= "col-xs-4">
+ <ul><strong>1.投稿する</strong>
+ <li>カテゴリに分けて投稿</li>
+ </ul>
+</div>
+
+<div class= "col-xs-4">
+ <ul><strong>2.仲間と繋がる</strong>
+ <li>フォローやいいね機能</li>
+ </ul>
+</div>
+
+<div class= "col-xs-4">
+ <ul><strong>3.体重を記録</strong>
+ <li>カレンダーを用いて、視覚的にわかりやすく、体重を管理</li>
+ </ul>
 </div>
 
 
-<div class="row">
-<h2>Health Supportとは？</h2>
-<p>「毎日をちょっと健康に」をコンセプトに、あなたの健康管理をサポートするSNSです。<br>
-ダイエットや筋トレを頑張る仲間を見つけたり、毎日の体重を記録することもできます。</p>
-</div>
-
-<div class="row">
-<h2>何ができるの？</h2>
-<p>・体重の記録<br>
-・フォロー機能<br>
-・お気に入り機能<br>
-</p>
 <br>
 <br>
 
@@ -42,23 +58,19 @@
 　</div>
 <% else %>
 <div class="jumbotron">
-<div class="row">
+<div class="row" style="text-align:center;">
 <h2>さあ、あなたも健康的な毎日を始めよう！</h2>
 <%= link_to "新規登録", new_user_registration_path, class:"btn btn-primary" %>
 <%= link_to 'ログイン', new_user_session_path, class:"btn btn-primary" %>｜
-<%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class:"btn btn-primary" %>
+<%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class:"btn btn-success" %>
 <br>
 <br>
-
-<p>ログインすると仲間の投稿が見れたり、自分も投稿できるようになります。</p>
-<br>
-<br>
+<p>ログインすると全ての仲間の投稿が見れたり、自分も投稿できるようになります。</p>
 </div>
-</div>
-
-
+<div class="row">
 <%= render 'posts/rank', all_ranks: @all_ranks %>
 <% end %>
-
+</div>
+</div>
 
 </div>

@@ -37,7 +37,7 @@
 
           </div>
           <div class="col-xs-6">
-            <div class="row post-image" style= "box-shadow: 8px 8px 8px rgba(0,0,0,0.3);">
+            <div class="row post-image">
               <%= attachment_image_tag @post, :image, :fill, 280, 280, class:"img-rounded", fallback: "no-image.png" %>
             </div>
           </div>
@@ -53,7 +53,7 @@
    </div>
 
    <div class="col-xs-6 likes">
-     <h3 style= "text-shadow: 1px 1px 2px pink;">この投稿にいいねした人</h3>
+     <h3><span class="under" style= "background: linear-gradient(transparent 70%, #ffa500 70%);">この投稿にいいねした人</span></h3>
      <%= render 'posts/liked', users: @users %>
    </div>
 
