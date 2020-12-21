@@ -1,7 +1,7 @@
 <div class="container">
  <div class="row">
    <div class="col-xs-3">
-     <h1>マイプロフィール</h1>
+     <h3 style="text-align: center; background: linear-gradient(transparent 70%, #ffa500 70%);">マイプロフィール</h3>
        <%= form_with model:@user, local:true do |f| %>
        <%= render 'layouts/error_messages', model: f.object %><!--バリデーション-->
        <h4>ユーザーネーム</h4>

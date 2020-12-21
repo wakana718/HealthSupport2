@@ -1,13 +1,13 @@
-<h1>投稿一覧</h1>
 <!--カテゴリ検索-->
 <div class="search-form">
   <%= form_tag(posts_path, method: "get") do %>
-    <h4>カテゴリで絞り込む</h4>
+    <h3><span class="under" style= "background: linear-gradient(transparent 70%, #ffa500 70%);">カテゴリで絞り込む</span></h3>
     <%= select_tag :genre_status, options_for_select(Post.genre_statuses, { :selected => params[:genre_status].to_i }) %>
     <%= submit_tag "検索" %>
   <% end %>
 </div>
-
+<br>
+<br>
 <table class="table">
   <thead>
     <tr>
@@ -51,10 +51,10 @@
       </td>
       <td><%= link_to "詳細表示", post_path(post.id), class:"btn btn-default" %></td>
       <% end %>
-      <%= paginate @posts %>
     </tr>
   <tbody>
 </table>
+ <div class="pull-right"><%= paginate @posts %></div>
 
 
 <% if @posts.empty? %>

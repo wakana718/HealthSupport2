@@ -30,9 +30,10 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @user = @post.user
     @comment = Comment.new
 
-    @users = User.find(@post.likes.pluck(:user_id))
+    # @users = User.find(@post.likes.pluck(:user_id))
 
     likes = Like.where(post_id: params[:id])
     @users = User.find(likes.pluck(:user_id))

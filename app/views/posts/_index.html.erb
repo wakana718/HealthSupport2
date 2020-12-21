@@ -1,61 +1,34 @@
-<h1>投稿一覧</h1>
-<!--カテゴリ検索-->
-<div class="search-form">
-  <%= form_tag(posts_path, method: "get") do %>
-    <h4>カテゴリで絞り込む</h4>
-    <%= select_tag :genre_status, options_for_select(Post.genre_statuses, { :selected => params[:genre_status].to_i }) %>
-    <%= submit_tag "検索" %>
-  <% end %>
+<h2><span class="under" style= "background: linear-gradient(transparent 70%, #ffa500 70%);">Recently Posts</span></h2>
+
+ <% posts.each do |post| %>
+<div class="col-xs-6 col-md-3">
+  <div class="thumbnail" style= "box-shadow: 3px 3px 3px rgba(0,0,0,0.3);">
+     <%= attachment_image_tag post, :image, :fill, 200, 200, class:"img-rounded", fallback: "no-image.png", style: "width: 100%;" %>
+    <div class="caption" style="padding: 25px;">
+      <div class="row">
+        <%= link_to user_path(post.user) do %>
+         <%= attachment_image_tag(post.user, :profile_image, :fill, 60, 60, class: "img-circle", fallback: "no-image-mini.jpeg", style: "float: left;") %>
+         <span><%= post.user.name %></span>
+        <% end %>
+      </div>
+      <div class="row">
+        <%= post.created_at.strftime('%Y/%m/%d') %>
+      </div>
+      <div class="row">
+        カテゴリ：<%= post.genre_status %>
+      </div>
+      <div class="row">
+        <!--コメント数の表示-->
+        <div class= "glyphicon glyphicon-comment">：<%= post.comments.count %>件</div>
+        <!--いいね数の表示-->
+        <div id="likes_buttons<%= post.id %>" ><%= render 'likes/like', { post: post} %></div>
+        <%= link_to "詳細表示", post_path(post.id), class:"btn btn-default" %>
+      </div>
+    </div>
+  </div>
 </div>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th style="width: 10%;">ユーザー</th>
-      <th colspan="1"></th>
-      <th>投稿</th>
-      <th colspan="1"></th>
-      <th style="width: 10%;">カテゴリ</th>
-      <th>投稿日時</th>
-      <th style="width: 10%;">コメント</th>
-      <th style="width: 10%;">いいね</th>
-      <th style="width: 10%;">お気に入り</th>
-    </tr>
-  </thead>
-  <tbody>
-   <% posts.each do |post| %>
-    <tr>
-      <td>
-        <%= link_to user_path(post.user) do %>
-          <%= attachment_image_tag(post.user, :profile_image, :fill, 60, 60, class: "img-circle", fallback: "no-image-mini.jpeg") %>
-        <% end %>
-      </td>
-      <td style="width: 7%;">
-        <%= link_to user_path(post.user) do %>
-          <%= post.user.name %>
-        <% end %>
-      </td>
-      <td><%= attachment_image_tag post, :image, :fill, 120, 100, class:"img-rounded", fallback: "no-image.png" %></td>
-      <td><%= post.body %></td>
-      <td><%= post.genre_status %></td>
-      <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
-      <!--コメント数の表示-->
-      <td><div class= "glyphicon glyphicon-comment">：<%= post.comments.count %>件</div></td>
-      <!--いいね数の表示-->
-      <td id="likes_buttons<%= post.id %>" >
-      <%= render 'likes/like', { post: post} %>
-      </td>
-      <!--お気に入り登録・解除-->
-      <td id="favorites_buttons<%= post.id %>" >
-      <%= render 'favorites/favorite', { post: post} %>
-      </td>
-      <td><%= link_to "詳細表示", post_path(post.id), class:"btn btn-default" %></td>
-      <% end %>
-      <%= paginate posts %>
-    </tr>
-  <tbody>
-</table>
-
+<% end %>
+<%= link_to "全ての投稿を見る", posts_path, class:"btn btn-info pull-right" %>
 
 
 <% if posts.empty? %>

@@ -1,18 +1,14 @@
-<p>
-  <strong>日時</strong>
-  <%= @record.start_time.strftime("%Y-%m-%d %H:%M") %>
-</p>
-
-<p>
-  <strong>体重</strong>
-  <%= @record.weight %>kg
-</p>
-
-<p>
-  <strong>メモ</strong>
-  <%= @record.memo%>
-</p>
-
-<%= link_to 'Edit', edit_record_path(@record) %> |
-<%= link_to 'Back', records_path %> |
-<%= link_to 'destroy', record_path(@record), method: :delete, data: {confirm: "本当に消しますか？"} %>
+<div class="container">
+  <div class="row">
+    <p><strong>日時：</strong><%= @record.start_time.strftime("%Y-%m-%d %H:%M") %></p>
+    <p><strong>体重：</strong><%= @record.weight %>k</p>
+    <p><strong>メモ：</strong><%= @record.memo%></p>
+  </div>
+ <div class="row">
+    <%= link_to '編集', edit_record_path(@record), class:"btn btn-primary btn-sm" %>
+    <%= link_to '削除', record_path(@record), method: :delete, data: {confirm: "本当に消しますか？"}, class:"btn btn-danger btn-sm" %>
+ </div>
+ <div class="row">
+    <%= link_to '戻る', records_path, class:"btn btn-default btn-sm"  %>
+ </div>
+</div>
