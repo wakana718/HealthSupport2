@@ -1,25 +1,25 @@
-<h2><span class="under" style= "background: linear-gradient(transparent 70%, #ffa500 70%);">いいね順ランキング</span></h2>
+<h2><span class="under" style= "background: linear-gradient(transparent 70%, #ffa500 70%); text-shadow: 1px 1px 2px gray">いいね順ランキング</span></h2>
  <table class="table">
     <thead>
         <tr>
              <th colspan="1"></th>
-             <th style="width: 10%;">ユーザー</th>
+             <th style="width: 7%;">ユーザー</th>
              <th colspan="1"></th>
              <th>投稿</th>
              <th colspan="1"></th>
-             <th>カテゴリ</th>
+             <th style="width: 7%;">カテゴリ</th>
              <th>投稿日時</th>
              <th style="width: 10%;">コメント</th>
-             <th>いいね</th>
+             <th style="width: 6%;">いいね</th>
         </tr>
     </thead>
 　  <tbody>
 　          <% all_ranks.each.with_index(1) do |post, i| %>
 　      <tr>
 　          <%= link_to user_path(post.user) do %>
-             <td> 第<%= i %>位</td>
+             <td style="width: 7%;"> <span style="border-bottom: double 5px #FFC778;">第<%= i %>位</span></td>
              <td><%= attachment_image_tag(post.user, :profile_image, :fill, 50, 50, class: "img-circle", fallback: "no-image-mini.jpeg") %></td>
-             <td><%= post.user.name %></td>
+             <td style="width: 7%;"><%= post.user.name %></td>
              <% end %>
              <td><%= attachment_image_tag post, :image, :fill, 100, 100, class:"img-rounded", fallback: "no_image.jpg" %></td>
              <td><%= post.body %></td>
@@ -28,7 +28,7 @@
              <!--コメント数の表示-->
              <td><div class= "glyphicon glyphicon-comment">：<%= post.comments.count %>件</div></td>
              <!--いいね数の表示-->
-             <td><div class= "glyphicon glyphicon-heart">いいね：<%= post.likes.count %></div></td>
+             <td><div class= "glyphicon glyphicon-heart">：<%= post.likes.count %></div></td>
             <% end %>
         </tr>
     <tbody>
