@@ -59,6 +59,7 @@
 
   <% if user_signed_in? %>
   <div class="row-post"><%= render 'posts/index', posts: @posts %></div>
+  <div class="row" style="margin-bottom: 30px;"></div>
   <div class="row user-index" style="margin-bottom: 30px;"><%= render 'users/index', users: @users %></div>
   <% else %>
   <div class="jumbotron" style="background-color:#fffacd; box-shadow: 3px 3px 3px rgba(0,0,0,0.3);">
