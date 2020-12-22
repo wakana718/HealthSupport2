@@ -1,20 +1,20 @@
 <div class="container">
  <div class="row">
-   <div class="col-xs-6">
-     <h1>投稿を編集する</h1>
+   <div class="col-xs-12" style="margin: 0 34%;">
+     <h3><span class="under" style= "background: linear-gradient(transparent 70%, #ffa500 70%);">投稿を編集する</span></h3>
         <%= form_with model:@post, local:true do |f| %>
-         <div class="row">
+         <div class="row" style="margin-bottom: 7px;">
            <h4>画像</h4><%= attachment_image_tag @post, :image, :fill, 240, 200, class:"img-rounded", fallback: "no-image.jpg"%>
          </div>
          <div class="row">
-           <h4>投稿文</h4><%= f.text_area :body, rows:'3', class:"col-xs-6"%>
+           <h4>投稿文</h4><%= f.text_area :body, rows:'3', class:"col-xs-3"%>
+        </div>
+        <div class="row" style="margin-bottom: 12px;">
+           <h4>カテゴリ</h4><%= f.select :genre_status, Post.genre_statuses.keys, {prompt: '選択してください'}, class: "col-xs-2" %>
         </div>
         <div class="row">
-           <h4>カテゴリ</h4><%= f.select :genre_status, Post.genre_statuses.keys, {prompt: '選択してください'}, class: "col-xs-6" %>
-        </div>
-        <div class="row">
-           <%= f.submit "投稿を更新", class:"col-xs-2 btn btn-success" %>
-           <%= link_to "キャンセル", post_path(current_user), class:"col-xs-2 btn btn-default" %>
+           <%= f.submit "投稿を更新", class:"col-xs-1 btn btn-success" %>
+           <%= link_to "キャンセル", post_path(current_user), class:"col-xs-1 btn btn-default" %>
         </div>
        <% end %>
    </div>

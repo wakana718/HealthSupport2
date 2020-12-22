@@ -1,22 +1,21 @@
 <div class="container">
   <div class="row">
    <div class="col-xs-12">
-     <h2><%= @user.name %>さんのフォロワー</h2>
+     <h2><span class="under" style= "background: linear-gradient(transparent 70%, #ffa500 70%);"><%= @user.name %>さんのフォロワー</span></h2>
       <% if @user.follower_user.exists? %>
        <table class="table hover">
          <thead>
-           <th>image</th>
-           <th>name</th>
+           <th>ユーザー</th>
            <th colspan="3"></th>
          </thead>
          <tbody>
            <% @user.follower_user.each do |user| %>
            <tr>
-             <td><%= attachment_image_tag user, :profile_image, :fill, 100, 100, class:"img-circle", fallback: "no-image-mini.jpg" %></td>
+             <td><%= attachment_image_tag user, :profile_image, :fill, 70, 70, class:"img-circle", fallback: "no-image-mini.jpg" %></td>
              <td><%= user.name %></td>
              <td>フォロー数：<%= user.follower.count %></td>
              <td>フォロワー数：<%= user.followed.count %></td>
-             <td><%= link_to "show", user_path(user) %></td>
+             <td><%= link_to "詳細表示", user_path(user), class:"btn btn-default" %></td>
            </tr>
            <% end %>
          </tbody>

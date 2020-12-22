@@ -1,17 +1,14 @@
 <div class="container">
  <div class="row">
-   <div class="col-xs-3">
-     <h3 style="text-align: center; background: linear-gradient(transparent 70%, #ffa500 70%);">マイプロフィール</h3>
+   <div class="col-xs-12" style="margin: 50px 34%;">
+     <h3><span class="under" style= "background: linear-gradient(transparent 70%, #ffa500 70%);">マイプロフィール</span></h3>
        <%= form_with model:@user, local:true do |f| %>
        <%= render 'layouts/error_messages', model: f.object %><!--バリデーション-->
-       <h4>ユーザーネーム</h4>
-       <%= f.text_field :name %>
-       <h4>プロフィール画像</h4>
-       <%= f.attachment_field :profile_image %>
-       <h4>自己紹介文</h4>
-       <%= f.text_area :intoduction %>
-       <%= f.submit "プロフィールを更新", class:"btn btn-success" %>
-       <%= link_to "キャンセル", user_path(@user), class:"btn btn-default" %>
+       <div class="row form-name" style="margin-bottom: 10px;"><h4>ユーザーネーム</h4><%= f.text_field :name %></div>
+       <div class="row form-image" style="margin-bottom: 10px;"><h4>プロフィール画像</h4><%= f.attachment_field :profile_image %></div>
+       <div class="row form-body" style="margin-bottom: 10px;"><h4>自己紹介文</h4><%= f.text_area :intoduction, class:"col-xs-3" %></div>
+       <div class="row form-submit" style="margin-bottom: 10px;"><%= f.submit "プロフィールを更新", class:"btn btn-success" %></div>
+       <div class="row form-cancel"><%= link_to "キャンセル", user_path(@user), class:"btn btn-default" %></div>
        <% end %>
    </div>
  </div>
