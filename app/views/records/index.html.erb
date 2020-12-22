@@ -1,54 +1,35 @@
 <div class= "container">
-<div class= "row">
-<div class= "col-xs-5">
-
- <h3><span class="under" style= "background: linear-gradient(transparent 70%, #ffa500 70%);">体重を記録する</span></h3>
-<%= render 'records/new', record: @record %>
-
-
-<br>
-<br>
-
-<table class="table table-bordered">
-  <h4><span class="under" style= "background: linear-gradient(transparent 70%, #ffa500 70%);">記録</span></h4>
-  <thead>
-    <tr>
-      <th>日時</th>
-      <th>体重</th>
-      <th>メモ</th>
-
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @records.each do |record| %>
-      <tr>
-        <td><%= record.start_time.strftime("%Y/%m/%d %H:%M") %></td>
-        <td><%= record.weight %>kg</td>
-        <td><%= record.memo %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-
-
-
-</div>
-
-<div class= "col-xs-7">
-<%= month_calendar events: @records do |date, records| %>
-  <%= date.day %>
-
-  <% records.each do |record| %>
-    <div>
-      <%= link_to record.weight, record %>kg
+  <div class= "row">
+    <div class= "col-xs-5">
+      <h4 style="margin-bottom: 20px;"><span class="under" style= "background: linear-gradient(transparent 70%, #ffa500 70%);">体重を記録する</span></h4>
+      <%= render 'records/new', record: @record %>
+      <table class="table table-bordered">
+        <h4 style="margin-top: 30px;"><span class="under" style= "background: linear-gradient(transparent 70%, #ffa500 70%);">記録</span></h4>
+        <thead>
+          <tr>
+            <th>日時</th>
+            <th>体重</th>
+            <th>メモ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @records.each do |record| %>
+          <tr>
+            <td><%= record.start_time.strftime("%Y/%m/%d %H:%M") %></td>
+            <td><%= record.weight %>kg</td>
+            <td><%= record.memo %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
-  <% end %>
-<% end %>
-</div>
-</div>
-
-
-
+    <div class= "col-xs-7">
+      <%= month_calendar events: @records do |date, records| %>
+        <%= date.day %>
+        <% records.each do |record| %>
+          <div><%= link_to record.weight, record %>kg</div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
