@@ -19,7 +19,7 @@
 //= require_tree .
 
 
-$(document).ready(function () {
+$(document).on ('ready turbolinks:load', function() {
   $("#images").skippr({
     // スライドショーの変化 ("fade" or "slide")
     transition : 'fade',

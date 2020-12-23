@@ -21,7 +21,7 @@
             <ul class="nav navbar-nav navbar-right" style="font-size: 18px; position: absolute; top: 60px; right: 60px; letter-spacing: 0.1rem;">
               <% if user_signed_in? %>
               <li class="" style="margin-right: 25px;">
-                 <span class="glyphicon glyphicon-home" aria-hidden="true"><%= link_to 'TOP', root_path, "data-turbolinks": false  %></span>
+                 <span class="glyphicon glyphicon-home" aria-hidden="true"><%= link_to 'TOP', root_path %></span>
               </li>
               <li class="list-unstyled" style="margin-right: 25px;">
                 <span class="glyphicon glyphicon-user" aria-hidden="true"><%= link_to 'マイページ', user_path(current_user.id) %></span>
