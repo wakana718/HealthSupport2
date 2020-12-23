@@ -28,17 +28,10 @@
      <th><%= link_to 'お気に入りした投稿', favorites_users_path, class:"col-xs-10 btn btn-success" %></th>
     </tr>
     <% end %>
-
     <% unless @user == current_user %>
-     <% if current_user.following?(@user) %>
     <tr>
-     <th><%= link_to 'フォローを外す', unfollow_path(@user.id), method: :POST, class:"col-xs-12 btn btn-success" %></th>
+     <th id="follow_buttons<%= @user.id %>" ><%= render 'relationships/relationship', { user: @user} %></th>
     </tr>
-    <% else %>
-    <tr>
-     <th><%= link_to 'フォローする', follow_path(@user.id), method: :POST, class:"col-xs-12 btn btn-success" %></th>
-    </tr>
-     <% end %>
     <% end %>
    </table>
    </div>

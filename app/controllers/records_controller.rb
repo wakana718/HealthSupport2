@@ -14,7 +14,7 @@ class RecordsController < ApplicationController
 
   def index
     @record = Record.new
-    @records = current_user.records
+    @records = current_user.records.order(start_time: "DESC")
 
   end
 
