@@ -6,7 +6,7 @@
 　  <tbody>
 　      <% users.each do |user| %>
 　    <tr>
-       <td><%= attachment_image_tag user, :profile_image, :fill, 60, 60, class: "img-circle", fallback: "no_image.jpg" %></td>
+       <td><%= attachment_image_tag user, :profile_image, size: "60x60", class: "img-circle", fallback: "no_image.jpg" %></td>
        <td><%= user.name %></td>
        <td><%= user.intoduction %></td>
       </tr>

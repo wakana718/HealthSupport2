@@ -4,7 +4,7 @@
      <h3><span class="under" style= "background: linear-gradient(transparent 70%, #ffa500 70%);">投稿を編集する</span></h3>
         <%= form_with model:@post, local:true do |f| %>
          <div class="row" style="margin-bottom: 7px;">
-           <h4>画像</h4><%= attachment_image_tag @post, :image, :fill, 240, 200, class:"img-rounded", fallback: "no-image.jpg"%>
+           <h4>画像</h4><%= attachment_image_tag @post, :image, size: "240x200", class:"img-rounded", fallback: "no-image.jpg"%>
          </div>
          <div class="row">
            <h4>投稿文</h4><%= f.text_area :body, rows:'3', class:"col-xs-3"%>

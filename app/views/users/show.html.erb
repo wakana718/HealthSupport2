@@ -3,7 +3,7 @@
   <div class="col-xs-3 panel panel-default">
     <h3 style="text-align: center;"><span class="under" style= "background: linear-gradient(transparent 70%, #ffa500 70%);">プロフィール</span></h3>
     <div class="panel-body">
-      <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, class: "img-circle", fallback: "no_image.jpg" %>
+      <%= attachment_image_tag @user, :profile_image, size: "100x100", class: "img-circle", fallback: "no_image.jpg" %>
    <table class="table col-xs-6">
     <tr>
      <th>ユーザーネーム： <%= @user.name %></th>
@@ -53,7 +53,7 @@
 　      <tbody>
         <% @posts.each do |post| %>
         <tr>
-         <td><%= attachment_image_tag post, :image, :fill, 100, 100, class:"img-rounded", fallback: "no_image.jpg" %></td>
+         <td><%= attachment_image_tag post, :image, size: "100x100", class:"img-rounded", fallback: "no_image.jpg" %></td>
          <td><%= post.body %></td>
          <td><%= post.genre_status %></td>
          <td><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></td>

@@ -2,11 +2,11 @@
  <% posts.each do |post| %>
 <div class="col-xs-6 col-md-3">
   <div class="thumbnail" style= "box-shadow: 3px 3px 3px rgba(0,0,0,0.3);">
-     <%= attachment_image_tag post, :image, :fill, 200, 200, class:"img-rounded", fallback: "no-image.png", style: "width: 100%;" %>
+     <%= attachment_image_tag post, :image, size: "200x200", class:"img-rounded", fallback: "no-image.png", style: "width: 100%;" %>
     <div class="caption" style="padding: 25px;">
       <div class="row">
         <%= link_to user_path(post.user) do %>
-         <%= attachment_image_tag post.user, :profile_image, :fill, 60, 60, class: "img-circle", fallback: "no-image-mini.jpg", style: "float: left;" %>
+         <%= attachment_image_tag post.user, :profile_image, size: "60x60", class: "img-circle", fallback: "no-image-mini.jpg", style: "float: left;" %>
          <span><%= post.user.name %></span>
         <% end %>
       </div>

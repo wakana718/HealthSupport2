@@ -9,7 +9,7 @@
     <tbody>
       <tr>
        <% users.each do |user| %>
-       <td><%= attachment_image_tag user, :profile_image, :fill, 70, 70, class: "img-circle", fallback: "no_image.jpg" %></td>
+       <td><%= attachment_image_tag user, :profile_image, size: "70x70", class: "img-circle", fallback: "no_image.jpg" %></td>
        <td><%= user.name %></td>
        <td class="glyphicon glyphicon-pencil">：<%= user.posts.count %></td>
        <td>フォロー数：<%= user.follower.count %></td>

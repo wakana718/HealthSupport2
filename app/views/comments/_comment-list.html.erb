@@ -4,7 +4,7 @@
           <li class="row comment">
             <div class="col-xs-4 comment-image">
              <%= link_to user_path(comment.user) do %>
-             <div class="row comment-auher"><%= attachment_image_tag(comment.user, :profile_image, :fill, 60, 60, class: "img-circle", fallback: "no_image.jpg") %></div>
+             <div class="row comment-auher"><%= attachment_image_tag(comment.user, :profile_image, size: "60x60", class: "img-circle", fallback: "no_image.jpg") %></div>
              <div class="row comment-auher"><%= comment.user.name %></div>
              <% end %>
             </div>
