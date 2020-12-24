@@ -23,7 +23,6 @@ class PostsController < ApplicationController
     @post = Post.new
     @posts = Post.page(params[:page]).reverse_order
     if params[:genre_status].present?
-       #byebug
      @posts = @posts.get_by_genre_status params[:genre_status]
     end
   end
