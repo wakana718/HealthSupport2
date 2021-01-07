@@ -7,6 +7,7 @@
        <div class="row form-name" style="margin-bottom: 10px;"><h4>ユーザーネーム</h4><%= f.text_field :name %></div>
        <div class="row form-image" style="margin-bottom: 10px;">
         <h4>プロフィール画像</h4><%= attachment_image_tag @user, :profile_image, size: "100x100", class:"img-circle", fallback: "no_image.jpg" %>
+        <%= f.attachment_field :profile_image, placeholder: "プロフィール画像", class: "user-edit-form" %>
        </div>
        <div class="row form-body" style="margin-bottom: 10px;"><h4>自己紹介文</h4><%= f.text_area :intoduction, class:"col-xs-3" %></div>
        <div class="row form-submit" style="margin-bottom: 10px;"><%= f.submit "プロフィールを更新", class:"btn btn-success" %></div>
