@@ -40,6 +40,11 @@
             <div class="row post-image">
               <%= attachment_image_tag @post, :image, size: "280x280", class:"img-rounded", fallback: "no-image.png" %>
             </div>
+            <div style="">
+              <% @post.tags.each do |tag| %>
+              <span class="label"><%= tag.name %></span>
+              <% end %>
+            </div>
           </div>
         </div>
         <!--コメント数の表示-->

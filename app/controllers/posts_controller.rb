@@ -10,6 +10,11 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
+      tags = Vision.get_image_data(@post.image)
+      pp tags
+      tags.each do |tag|
+        @post.tags.create(name: tag)
+      end
        # 投稿に成功した場合
       redirect_to user_path(current_user), notice: "投稿しました！"
     else
