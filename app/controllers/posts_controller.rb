@@ -41,8 +41,6 @@ class PostsController < ApplicationController
 
     likes = Like.where(post_id: params[:id])
     @users = User.find(likes.pluck(:user_id))
-
-
   end
 
 
@@ -51,7 +49,8 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
+    @post = current_user.posts.find(params[:id])
+    # @post = Post.find(params[:id])
     if @post.update(post_params)
      redirect_to post_path(@post.id), notice: "投稿を更新しました！"
     else

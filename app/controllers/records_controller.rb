@@ -5,17 +5,17 @@ class RecordsController < ApplicationController
     @record = Record.new(record_params)
     @record.user_id = current_user.id
     if @record.save
-     redirect_to records_path, notice: "記録しました！"
+      redirect_to records_path, notice: "記録しました！"
     else
-     flash.now[:alert] = '記録できませんでした'
-     render :new
+      @records = current_user.records.order(start_time: "DESC")
+      flash.now[:alert] = '記録できませんでした'
+      render :index
     end
   end
 
   def index
     @record = Record.new
     @records = current_user.records.order(start_time: "DESC")
-
   end
 
   def show
