@@ -1,86 +1,81 @@
 <div class = "container">
- <div class="row">
-  <div class="col-xs-3 panel panel-default">
-    <h3 style="text-align: center;"><span class="under" style= "background: linear-gradient(transparent 70%, #ffa500 70%);">プロフィール</span></h3>
-    <div class="panel-body">
-      <%= attachment_image_tag @user, :profile_image, size: "100x100", class: "img-circle", fallback: "no_image.jpg" %>
-   <table class="table col-xs-6">
-    <tr>
-     <th>ユーザーネーム： <%= @user.name %></th>
-    </tr>
-    <tr>
-     <th>自己紹介文： <%= @user.intoduction %></th>
-    </tr>
-    <tr>
-     <th><%= link_to "フォロー数: #{@user.follower.count}", following_user_path %></th>
-    </tr>
-    <tr>
-     <th><%= link_to "フォロワー数: #{@user.followed.count}", followers_user_path %></th>
-    </tr>
-    <% if @user.id == current_user.id %>
-    <tr>
-     <th><%= link_to  "プロフィールを編集", edit_user_path(@user), class:"col-xs-10 btn btn-primary" %></th>
-    </tr>
-    <tr>
-     <th><%= link_to  "アカウントを削除", user_registration_path, method: :DELETE, data: {confirm: "本当に退会しますか？"}, class:"col-xs-10 btn btn-danger" %></th>
-    </tr>
-    <tr>
-     <th><%= link_to 'お気に入りした投稿', favorites_users_path, class:"col-xs-10 btn btn-success" %></th>
-    </tr>
-    <% end %>
-    <% unless @user == current_user %>
-    <tr>
-     <th id="follow_buttons<%= @user.id %>" ><%= render 'relationships/relationship', { user: @user} %></th>
-    </tr>
-    <% end %>
-   </table>
-   </div>
-  </div>
-
-  <div class="col-xs-9">
-       <h2><%= @user.name %>さんの投稿</h2>
-      <% if @posts.exists? %>
-      <table class="table">
-      <thead>
-         <tr>
-          <th colspan="2"></th>
-　        <th style="width: 10%;">カテゴリ</th>
-　        <th>投稿日時</th>
-　        <th style="width: 10%;">コメント</th>
-　        <th style="width: 10%;">いいね</th>
-　       </tr>
-　      </thead>
-　      <tbody>
-        <% @posts.each do |post| %>
+  <div class="row">
+    <div class="col-xs-3 panel panel-default">
+      <h3 style="text-align: center;"><span class="under" style= "background: linear-gradient(transparent 70%, #ffa500 70%);">プロフィール</span></h3>
+      <div class="panel-body">
+        <%= attachment_image_tag @user, :profile_image, size: "100x100", class: "img-circle", fallback: "no_image.jpg" %>
+      <table class="table col-xs-6">
         <tr>
-         <td><%= attachment_image_tag post, :image, size: "100x100", class:"img-rounded", fallback: "no_image.jpg" %></td>
-         <td><%= post.body %></td>
-         <td><%= post.genre_status %></td>
-         <td><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></td>
-         <!--コメント数の表示-->
-         <td><div class= "glyphicon glyphicon-comment"><%= post.comments.count %>件</div></td>
-         <!--いいね数の表示-->
-         <td>
-         <div class= "glyphicon glyphicon-heart"><%= post.likes.count %>件</div>
-         </td>
-         <td>
-         <%= link_to "詳細表示", post_path(post.id), class:"btn btn-default" %>
-         </td>
-        <% end %>
+          <th>ユーザーネーム： <%= @user.name %></th>
         </tr>
-        <tbody>
+        <tr>
+          <th>自己紹介文： <%= @user.intoduction %></th>
+        </tr>
+        <tr>
+          <th><%= link_to "フォロー数: #{@user.follower.count}", following_user_path %></th>
+        </tr>
+        <tr>
+          <th><%= link_to "フォロワー数: #{@user.followed.count}", followers_user_path %></th>
+        </tr>
+        <% if @user.id == current_user.id %>
+        <tr>
+          <th><%= link_to  "プロフィールを編集", edit_user_path(@user), class:"col-xs-10 btn btn-primary" %></th>
+        </tr>
+        <tr>
+          <th><%= link_to  "アカウントを削除", user_registration_path, method: :DELETE, data: {confirm: "本当に退会しますか？"}, class:"col-xs-10 btn btn-danger" %></th>
+        </tr>
+        <tr>
+          <th><%= link_to 'お気に入りした投稿', favorites_users_path, class:"col-xs-10 btn btn-success" %></th>
+        </tr>
+        <% end %>
+        <% unless @user == current_user %>
+        <tr>
+          <th id="follow_buttons<%= @user.id %>" ><%= render 'relationships/relationship', { user: @user} %></th>
+        </tr>
+        <% end %>
+      </table>
+      </div>
+    </div>
+    <div class="col-xs-9">
+      <h2><%= @user.name %>さんの投稿</h2>
+      <% if @posts.exists? %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th colspan="2"></th>
+              <th style="width: 10%;">カテゴリ</th>
+              <th>投稿日時</th>
+              <th style="width: 10%;">コメント</th>
+              <th style="width: 10%;">いいね</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @posts.each do |post| %>
+            <tr>
+              <td><%= attachment_image_tag post, :image, size: "100x100", class:"img-rounded", fallback: "no_image.jpg" %></td>
+              <td><%= post.body %></td>
+              <td><%= post.genre_status %></td>
+              <td><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+              <!--コメント数の表示-->
+              <td><div class= "glyphicon glyphicon-comment"><%= post.comments.count %>件</div></td>
+              <!--いいね数の表示-->
+              <td><div class= "glyphicon glyphicon-heart"><%= post.likes.count %>件</div></td>
+              <td><%= link_to "詳細表示", post_path(post.id), class:"btn btn-default" %></td>
+            <% end %>
+            </tr>
+          <tbody>
         </table>
       <% else %>
-       <p>投稿はまだありません</p>
+        <p>投稿はまだありません</p>
       <% end %>
-     </div>
-   </div>
+    </div>
+  </div>
   <div class="row">
     <%= link_to :back do %>
       <div class= "btn btn-default pull-right">前のページに戻る</div>
     <% end %>
   </div>
- </div>
+</div>
 
 
 

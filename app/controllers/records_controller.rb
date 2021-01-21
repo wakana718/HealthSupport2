@@ -39,18 +39,16 @@ class RecordsController < ApplicationController
   def destroy
     @record = Record.find(params[:id])
     if @record.destroy
-     redirect_to records_path, notice:"記録を削除しました！"
+      redirect_to records_path, notice:"記録を削除しました！"
     else
-     flash.now[:alert] = '記録を削除できませんでした'
-     render :show
+      flash.now[:alert] = '記録を削除できませんでした'
+      render :show
     end
   end
 
   private
-
   def record_params
     params.require(:record).permit(:weight, :memo, :start_time, :user_id)
   end
-
 
 end

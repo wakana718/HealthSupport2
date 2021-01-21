@@ -1,27 +1,27 @@
 <!--コメント文の表示-->
-         <ol style="list-style:none">
-           <% post.comments.each do |comment| %>
-          <li class="row comment">
-            <div class="col-xs-4 comment-image">
-             <%= link_to user_path(comment.user) do %>
-             <div class="row comment-auher"><%= attachment_image_tag(comment.user, :profile_image, size: "60x60", class: "img-circle", fallback: "no_image.jpg") %></div>
-             <div class="row comment-auher"><%= comment.user.name %></div>
-             <% end %>
-            </div>
-            <div class="col-xs-8 comment-text">
-              <div class="row comment-date"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></div>
-              <div class="row comment-body"><%= comment.comment %></div>
-               <% if comment.user == current_user %>
-              <div class="row"><%= link_to "", post_comment_path(comment.post, comment), method: :delete, remote: true, data: {confirm: "本当に消しますか？"}, class: "glyphicon glyphicon-trash" %></div>
-               <% end %>
-            </div>
-          </li>
-           <% end %>
-         </ol>
+<ol style="list-style:none">
+  <% post.comments.each do |comment| %>
+  <li class="row comment">
+    <div class="col-xs-4 comment-image">
+    <%= link_to user_path(comment.user) do %>
+      <div class="row comment-auher"><%= attachment_image_tag(comment.user, :profile_image, size: "60x60", class: "img-circle", fallback: "no_image.jpg") %></div>
+      <div class="row comment-auher"><%= comment.user.name %></div>
+    <% end %>
+    </div>
+    <div class="col-xs-8 comment-text">
+      <div class="row comment-date"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></div>
+      <div class="row comment-body"><%= comment.comment %></div>
+      <% if comment.user == current_user %>
+      <div class="row"><%= link_to "", post_comment_path(comment.post, comment), method: :delete, remote: true, data: {confirm: "本当に消しますか？"}, class: "glyphicon glyphicon-trash" %></div>
+      <% end %>
+    </div>
+  </li>
+  <% end %>
+</ol>
 
-        <!--コメント入力フォーム-->
-        <%= form_with(url: post_comments_path(post.id), model: comment, method: :post, remote: true) do |f| %>
-          <%= render 'layouts/error_messages', model: comment %><!--バリデーション-->
-          <%= f.text_area :comment, rows:'3', class: "form-control",placeholder: "コメントをここに" %>
-          <%= f.submit "送信", class: "col-xs-2 btn btn-default pull-right" %>
-        <% end %>
+<!--コメント入力フォーム-->
+<%= form_with(url: post_comments_path(post.id), model: comment, method: :post, remote: true) do |f| %>
+  <%= render 'layouts/error_messages', model: comment %><!--バリデーション-->
+  <%= f.text_area :comment, rows:'3', class: "form-control",placeholder: "コメントをここに" %>
+  <%= f.submit "送信", class: "col-xs-2 btn btn-default pull-right" %>
+<% end %>

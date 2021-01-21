@@ -1,45 +1,39 @@
 <div class="posts">
-<h2>
-  <span class="under" style= "background: linear-gradient(transparent 70%, #ffa500 70%);  text-shadow: 1px 1px 2px gray">
-    Recently Posts
-  </span>
-</h2>
- <% posts.each do |post| %>
-<div class="col-xs-6 col-md-3">
-  <div class="thumbnail" style= "box-shadow: 3px 3px 3px rgba(0,0,0,0.3);">
-    <div class="image_wrapper">
-      <%= attachment_image_tag post, :image, size: "200x200", class:"img-rounded", fallback: "no-image.png" %>
-    </div>
-    <div class="caption" style="padding: 25px;">
-      <div class="row">
-        <%= link_to user_path(post.user) do %>
-         <%= attachment_image_tag post.user, :profile_image, size: "60x60", class: "img-circle", fallback: "no-image-mini.jpg", style: "float: left;" %>
-         <span><%= post.user.name %></span>
-        <% end %>
+  <h2>
+    <span class="under" style= "background: linear-gradient(transparent 70%, #ffa500 70%);  text-shadow: 1px 1px 2px gray">
+      Recently Posts
+    </span>
+  </h2>
+  <% posts.each do |post| %>
+  <div class="col-xs-6 col-md-3">
+    <div class="thumbnail" style= "box-shadow: 3px 3px 3px rgba(0,0,0,0.3);">
+      <div class="image_wrapper">
+       <%= attachment_image_tag post, :image, size: "200x200", class:"img-rounded", fallback: "no-image.png" %>
       </div>
-      <div class="row">
-        <%= post.created_at.strftime('%Y/%m/%d') %>
-      </div>
-      <div class="row">
-        カテゴリ：<%= post.genre_status %>
-      </div>
-      <div class="row">
-        <!--コメント数の表示-->
-        <div class= "glyphicon glyphicon-comment">：<%= post.comments.count %>件</div>
-        <!--いいね数の表示-->
-        <div id="likes_buttons<%= post.id %>" ><%= render 'likes/like', { post: post} %></div>
-        <%= link_to "詳細表示", post_path(post.id), class:"btn btn-default pull-right" %>
+      <div class="caption" style="padding: 25px;">
+        <div class="row">
+          <%= link_to user_path(post.user) do %>
+            <%= attachment_image_tag post.user, :profile_image, size: "60x60", class: "img-circle", fallback: "no-image-mini.jpg", style: "float: left;" %>
+            <span><%= post.user.name %></span>
+          <% end %>
+        </div>
+        <div class="row"><%= post.created_at.strftime('%Y/%m/%d') %></div>
+        <div class="row">カテゴリ：<%= post.genre_status %></div>
+        <div class="row">
+          <!--コメント数の表示-->
+          <div class= "glyphicon glyphicon-comment">：<%= post.comments.count %>件</div>
+          <!--いいね数の表示-->
+          <div id="likes_buttons<%= post.id %>" ><%= render 'likes/like', { post: post} %></div>
+          <%= link_to "詳細表示", post_path(post.id), class:"btn btn-default pull-right" %>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<% end %>
-<%= link_to "全ての投稿を見る", posts_path, class:"btn btn-info pull-right" %>
+  <% end %>
+  <%= link_to "全ての投稿を見る", posts_path, class:"btn btn-info pull-right" %>
 
-
-<% if posts.empty? %>
-  投稿がありません
-<% end %>
-
+  <% if posts.empty? %>
+    投稿がありません
+  <% end %>
 </div>
 

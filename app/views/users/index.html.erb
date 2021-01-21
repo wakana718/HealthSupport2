@@ -7,19 +7,19 @@
       <th>フォロー・フォロワー</th>
     </thead>
     <tbody>
-     <% @users.each do |user| %>
+      <% @users.each do |user| %>
       <tr>
        <td><%= attachment_image_tag user, :profile_image, size: "70x70", class: "img-circle", fallback: "no_image.jpg" %></td>
        <td><%= user.name %></td>
        <td class="glyphicon glyphicon-pencil">：<%= user.posts.count %></td>
        <td>フォロー数：<%= user.follower.count %></td>
        <td id="follower-count<%= user.id %>"><%= render 'relationships/follower-count', { user: user} %></td>
-         <% unless user == current_user %>
-       <td id="follow_buttons<%= user.id %>" ><%= render 'relationships/relationship', { user: user} %></td>
-         <% end %>
+          <% unless user == current_user %>
+            <td id="follow_buttons<%= user.id %>" ><%= render 'relationships/relationship', { user: user} %></td>
+          <% end %>
        <td><%= link_to "詳細表示", user_path(user), class:"btn btn-default" %></td>
       </tr>
-       <% end %>
+      <% end %>
     </tbody>
   </table>
 

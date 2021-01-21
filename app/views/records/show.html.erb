@@ -7,7 +7,7 @@
         <div class="row" style="margin-bottom: 10px;"><strong>メモ：</strong><%= @record.memo%></div>
         <div class="row" style="margin-bottom: 10px;">
           <%= link_to '編集', edit_record_path(@record), class:"btn btn-primary" %>
-      　  <%= link_to '削除', record_path(@record), method: :delete, data: {confirm: "本当に消しますか？"}, class:"btn btn-danger" %>
+      　   <%= link_to '削除', record_path(@record), method: :delete, data: {confirm: "本当に消しますか？"}, class:"btn btn-danger" %>
         </div>
         <div class="row"><%= link_to '戻る', records_path, class:"btn btn-default btn-sm"  %></div>
     </div>

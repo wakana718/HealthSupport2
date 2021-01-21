@@ -6,7 +6,6 @@ class UsersController < ApplicationController
   def top
     # ランキング機能
     @all_ranks = Post.find(Like.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
-
     @users = User.page(params[:page]).reverse_order
     @post = Post.new
     @posts = Post.page(params[:page]).reverse_order
@@ -30,14 +29,14 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-   if @user.update(user_params)
+    if @user.update(user_params)
       # 編集に成功した場合
       redirect_to user_path(current_user), notice: "プロフィールを更新しました！"
-   else
+    else
       # 編集に失敗した場合
       flash.now[:alert] = 'プロフィールを更新できませんでした'
       render :edit
-   end
+    end
   end
 
   def following
@@ -59,8 +58,6 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :profile_image, :intoduction)
   end
-
-
 
   def check_guest
     if current_user.email == 'guest@example.com' || current_user.name == 'guest'

@@ -1,52 +1,48 @@
 <div class="container">
   <div class="row">
-   <div class="col-xs-6 posts">
-        <div class="row post-form">
-          <div class="col-xs-6">
-            <div class="row table">
-              <table class="table">
-               <tr>
-                  <th><%= attachment_image_tag @user, :profile_image, size: "70x70", class:"img-circle", fallback: "no_image.jpg" %>
-                      <%= @user.name %></th>
-               </tr>
-               <tr>
-                 <th>投稿日時：<%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></th>
-               </tr>
-               <tr>
-                 <th>カテゴリ：<%= @post.genre_status %></th>
-               </tr>
-               <tr>
-                 <th><%= @post.body %></th>
-               </tr>
-               <tr><!--いいね数の表示-->
-                 <th id="likes_buttons<%= @post.id %>" >いいね：<%= render 'likes/like', { post: @post} %></th>
-               </tr>
-               <tr><!--お気に入り登録・解除-->
-                 <th id="favorites_buttons<%= @post.id %>" >お気に入り：<%= render 'favorites/favorite', { post: @post} %></th>
-               </tr>
-               <tr>
-                 <th>
-                   <% if current_user == @post.user %>
-                     <%= link_to "投稿を編集", edit_post_path(@post.id), class:"btn btn-primary btn-sm pull-right" %>
-                     <%= link_to "投稿を削除", post_path(@post.id), method: :delete, data: {confirm: "本当に消しますか？"}, class:"btn btn-danger btn-sm pull-right" %>
-                   <% end %>
-                 </th>
-               </tr>
-              </table>
-            </div>
-
-          </div>
-          <div class="col-xs-6">
-            <div class="row post-image">
-              <%= attachment_image_tag @post, :image, size: "280x280", class:"img-rounded", fallback: "no-image.png" %>
-            </div>
-            <div style="">
-              <% @post.tags.each do |tag| %>
-              <span class="label"><%= tag.name %></span>
-              <% end %>
-            </div>
+    <div class="col-xs-6 posts">
+      <div class="row post-form">
+        <div class="col-xs-6">
+          <div class="row table">
+            <table class="table">
+              <tr>
+                <th><%= attachment_image_tag @user, :profile_image, size: "70x70", class:"img-circle", fallback: "no_image.jpg" %><%= @user.name %></th>
+              </tr>
+              <tr>
+                <th>投稿日時：<%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></th>
+              </tr>
+              <tr>
+                <th>カテゴリ：<%= @post.genre_status %></th>
+              </tr>
+              <tr>
+                <th><%= @post.body %></th>
+              </tr>
+              <tr><!--いいね数の表示-->
+                <th id="likes_buttons<%= @post.id %>" >いいね：<%= render 'likes/like', { post: @post} %></th>
+              </tr>
+              <tr><!--お気に入り登録・解除-->
+                <th id="favorites_buttons<%= @post.id %>" >お気に入り：<%= render 'favorites/favorite', { post: @post} %></th>
+              </tr>
+              <tr>
+                <th>
+                  <% if current_user == @post.user %>
+                    <%= link_to "投稿を編集", edit_post_path(@post.id), class:"btn btn-primary btn-sm pull-right" %>
+                    <%= link_to "投稿を削除", post_path(@post.id), method: :delete, data: {confirm: "本当に消しますか？"}, class:"btn btn-danger btn-sm pull-right" %>
+                  <% end %>
+                </th>
+              </tr>
+            </table>
           </div>
         </div>
+        <div class="col-xs-6">
+          <div class="row post-image"><%= attachment_image_tag @post, :image, size: "280x280", class:"img-rounded", fallback: "no-image.png" %></div>
+          <div style="">
+            <% @post.tags.each do |tag| %>
+              <span class="label"><%= tag.name %></span>
+            <% end %>
+          </div>
+        </div>
+      </div>
         <!--コメント数の表示-->
         <div id="comment-count<%= @post.id %>" class="row post-count-form" style="border-bottom:1px solid;">
           <%= render "comments/comment-count", post: @post %>
@@ -55,21 +51,17 @@
         <div id="comment-list<%= @post.id %>" class="row comment-form">
       　　<%= render "comments/comment-list", post: @post, comment: Comment.new %>
        </div>
-   </div>
-
-   <div class="col-xs-6 likes">
-     <h3><span class="under" style= "background: linear-gradient(transparent 70%, #ffa500 70%);">この投稿にいいねした人</span></h3>
-     <%= render 'posts/liked', users: @users %>
-   </div>
-
+    </div>
+    <div class="col-xs-6 likes">
+      <h3><span class="under" style= "background: linear-gradient(transparent 70%, #ffa500 70%);">この投稿にいいねした人</span></h3>
+        <%= render 'posts/liked', users: @users %>
+    </div>
   </div>
-
   <div class="row">
     <%= link_to :back do %>
       <div class= "btn btn-default pull-right">前のページに戻る</div>
     <% end %>
   </div>
-
 </div>
 
 

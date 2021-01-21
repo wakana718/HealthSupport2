@@ -1,16 +1,16 @@
 <% if users.present? %>
  <table class="table">
-     <thead>
-　    <th>ユーザー</th>
-　  </thead>
-　  <tbody>
-　      <% users.each do |user| %>
-　    <tr>
-       <td><%= attachment_image_tag user, :profile_image, size: "60x60", class: "img-circle", fallback: "no_image.jpg" %></td>
-       <td><%= user.name %></td>
-       <td><%= user.intoduction %></td>
+    <thead>
+      <th>ユーザー</th>
+    </thead>
+    <tbody>
+      <% users.each do |user| %>
+      <tr>
+        <td><%= attachment_image_tag user, :profile_image, size: "60x60", class: "img-circle", fallback: "no_image.jpg" %></td>
+        <td><%= user.name %></td>
+        <td><%= user.intoduction %></td>
       </tr>
-        <% end %>
+      <% end %>
     </tbody>
   </table>
 <% else %>

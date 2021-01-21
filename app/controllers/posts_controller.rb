@@ -28,7 +28,7 @@ class PostsController < ApplicationController
     @post = Post.new
     @posts = Post.page(params[:page]).reverse_order
     if params[:genre_status].present?
-     @posts = @posts.get_by_genre_status params[:genre_status]
+      @posts = @posts.get_by_genre_status params[:genre_status]
     end
   end
 
@@ -36,13 +36,10 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @user = @post.user
     @comment = Comment.new
-
     # @users = User.find(@post.likes.pluck(:user_id))
-
     likes = Like.where(post_id: params[:id])
     @users = User.find(likes.pluck(:user_id))
   end
-
 
   def edit
     @post = Post.find(params[:id])
@@ -52,7 +49,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.find(params[:id])
     # @post = Post.find(params[:id])
     if @post.update(post_params)
-     redirect_to post_path(@post.id), notice: "投稿を更新しました！"
+      redirect_to post_path(@post.id), notice: "投稿を更新しました！"
     else
       flash.now[:alert] = '投稿を更新できませんでした'
       render :edit
@@ -64,10 +61,10 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     if @post.destroy
-       # 削除に成功した場合
+      # 削除に成功した場合
       redirect_to user_path(current_user), notice: "投稿が削除されました！"
     else
-       # 削除に失敗した場合
+      # 削除に失敗した場合
       flash.now[:alert] = '投稿を削除できませんでした'
       render :show
     end
